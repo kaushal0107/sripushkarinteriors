@@ -1,0 +1,19 @@
+body{
+	background-color: lightyellow;
+	font-family: sans-serif;
+}
+
+.gallery{
+	margin: 10px 400px;
+	
+}
+.gallery img{
+	width: 250px;
+	padding: 5px;
+filter: grayscale(0)
+}	
+.gallery img:hover{
+		
+	filter: grayscale(100%);
+		transform: scale(1.1);
+	}
