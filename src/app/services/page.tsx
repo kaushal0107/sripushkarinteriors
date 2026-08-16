@@ -49,6 +49,7 @@ export default function ServicesPage() {
                   src={SERVICE_IMAGE[service.slug]}
                   alt={`${service.title} — example project`}
                   fill
+                  priority={i === 0}
                   sizes="(min-width: 1024px) 46vw, 92vw"
                   className="object-cover"
                 />

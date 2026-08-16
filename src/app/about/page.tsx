@@ -51,6 +51,7 @@ export default function AboutPage() {
               src="/images/projects/residential/residential-03.webp"
               alt="Illustration of a completed living space with pendant lighting"
               fill
+              priority
               sizes="(min-width: 1024px) 45vw, 92vw"
               className="object-cover"
             />

@@ -22,7 +22,7 @@ export function PageHero({
         fill
         priority
         sizes="100vw"
-        quality={78}
+        quality={80}
         className="absolute inset-0 -z-10 object-cover"
       />
       <div

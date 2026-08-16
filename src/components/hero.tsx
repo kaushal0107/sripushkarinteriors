@@ -40,7 +40,7 @@ export function Hero() {
           fill
           priority={i === 0}
           sizes="100vw"
-          quality={82}
+          quality={80}
           className={`absolute inset-0 -z-10 object-cover transition-opacity duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
             i === index ? "opacity-100" : "opacity-0"
           }`}
