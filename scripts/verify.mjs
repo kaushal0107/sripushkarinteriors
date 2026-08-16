@@ -119,7 +119,7 @@ const check = (name, pass, detail = "") => results.push({ name, pass: pass ? "PA
   await page.fill('input[name="name"]', "Priya Sharma");
   await page.fill('input[name="email"]', "priya@example.com");
   await page.fill('input[name="phone"]', "+91 98765 43210");
-  await page.fill('textarea[name="message"]', "2BHK in Kandivali East, around 850 sq ft.");
+  await page.fill('textarea[name="message"]', "2BHK in Baner, around 850 sq ft.");
   await page.getByRole("button", { name: /Request a free consultation/ }).click();
   await page.waitForTimeout(2500);
   check(
