@@ -1,35 +1,48 @@
 /**
  * Single source of truth for business facts and page copy.
  *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * EVERYTHING HERE IS FICTIONAL.
+ *
+ * This repository began as a real client site. For a public portfolio the
+ * client's identity, staff, customers and project photography have all been
+ * removed — the firm name, domain, phone numbers, address and people below are
+ * invented, the domain uses the RFC 2606 `.example` reserved TLD, and the
+ * imagery is generated (see scripts/generate-placeholder-images.mjs).
+ *
+ * What is real is the engineering: the structure, the measurements on
+ * /case-study, and the defects catalogued there.
+ * ─────────────────────────────────────────────────────────────────────────────
+ *
  * On the legacy site every phone number, address and nav item was retyped by
  * hand on all six pages, so they drifted (the footer said "Projects" on one
  * page and "Project" on another, and the nav order differed between files).
  */
 
 export const site = {
-  name: "Sri Pushkar Interiors",
-  legalName: "Sri Pushkar Interiors & Civil Contractor",
-  tagline: "Interior design, fit-out and civil contracting in Mumbai",
+  name: "Meridian Interiors",
+  legalName: "Meridian Interiors & Contracts",
+  tagline: "Interior design, fit-out and civil contracting in Pune",
   description:
-    "Turnkey interior design and civil contracting in Mumbai. Residential interiors, commercial fit-outs and construction handled end to end — design, materials, labour and supervision.",
-  url: "https://sripushkarinteriors.com",
+    "Turnkey interior design and civil contracting in Pune. Residential interiors, commercial fit-outs and construction handled end to end — design, materials, labour and supervision.",
+  url: "https://meridian-interiors.example",
   founded: 2009,
   phones: [
-    { display: "+91 79772 52528", href: "tel:+917977252528" },
-    { display: "+91 83560 92311", href: "tel:+918356092311" },
+    { display: "+91 98765 43210", href: "tel:+919876543210" },
+    { display: "+91 98765 43211", href: "tel:+919876543211" },
   ],
-  email: "info@sripushkarinteriors.com",
+  email: "hello@meridian-interiors.example",
   address: {
-    street: "Thakur Village, Kandivali (East)",
-    city: "Mumbai",
+    street: "Unit 12, Sundale Business Park",
+    city: "Pune",
     region: "Maharashtra",
-    postalCode: "400101",
+    postalCode: "411001",
     country: "IN",
   },
-  mapQuery: "Thakur Village, Kandivali East, Mumbai, Maharashtra 400101",
-  social: [
-    { label: "Instagram", href: "https://www.instagram.com/kaushal3172/" },
-  ],
+  mapQuery: "Sundale Business Park, Pune, Maharashtra 411001",
+  social: [{ label: "Instagram", href: "https://instagram.example/meridian" }],
+  /** Rendered in the footer and on /case-study. */
+  isDemo: true,
 } as const;
 
 export const nav = [
@@ -43,11 +56,11 @@ export const nav = [
 /**
  * The legacy site claimed "879 Happy Customers" alongside "954 Expert
  * Designers" — more designers than clients — plus "8 Cities | 16 Experience
- * Centers" copied verbatim from a national competitor. These are the numbers
- * the work actually supports: a Mumbai firm operating since 2009.
+ * Centers" copied verbatim from a national competitor. These are internally
+ * consistent stand-ins for a firm trading since 2009.
  */
 export const stats = [
-  { value: "15+", label: "Years in practice", detail: "Building in Mumbai since 2009" },
+  { value: "15+", label: "Years in practice", detail: "Building in Pune since 2009" },
   { value: "300+", label: "Projects delivered", detail: "Homes, offices, retail and civil" },
   { value: "100%", label: "Turnkey", detail: "Design through handover, one contract" },
   { value: "1 yr", label: "Workmanship warranty", detail: "Materials per manufacturer terms" },
@@ -180,25 +193,36 @@ export const process = [
   },
 ] as const;
 
+/** Fictional. Rendered as monogram avatars — no photographs of real people. */
 export const team = [
   {
-    name: "Ramprakash Sharma",
+    name: "Aditi Raman",
+    initials: "AR",
     role: "Founder & principal contractor",
-    bio: "Runs site execution and holds the schedule. Has been contracting in Mumbai since before the firm was formed in 2009.",
-    image: "/images/team/team-03.webp",
+    bio: "Runs site execution and holds the schedule. Has been contracting in Pune since before the firm was formed in 2009.",
   },
   {
-    name: "Shashank Sharma",
+    name: "Vikram Sethi",
+    initials: "VS",
     role: "Design lead",
     bio: "Owns layouts, elevations and material selection — the drawings that get signed before anyone starts breaking walls.",
-    image: "/images/team/team-02.webp",
   },
   {
-    name: "Chacha Sharma",
-    role: "Procurement & property",
+    name: "Nisha Kulkarni",
+    initials: "NK",
+    role: "Procurement & site management",
     bio: "Sources material, negotiates with vendors, and keeps the bill of quantities honest between estimate and final bill.",
-    image: "/images/team/team-01.webp",
   },
+] as const;
+
+/** Fictional. Drawn as wordmarks in src/components/client-marks.tsx. */
+export const clients = [
+  "Northbank",
+  "Corvus Group",
+  "Almora Hotels",
+  "Vantage Labs",
+  "Peregrine Retail",
+  "Tessellate",
 ] as const;
 
 export const faqs = [

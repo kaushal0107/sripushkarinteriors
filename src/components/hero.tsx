@@ -52,21 +52,18 @@ export function Hero() {
       ))}
 
       {/* Legibility scrim — the old hero laid white nav links straight onto
-          photographs, so the logo vanished on the bright slide. Two passes:
-          bottom-up for the headline, left-to-right for the body copy. */}
+          photographs, so the logo vanished on the bright slide. The artwork is
+          generated in the dark scheme, so this only needs to deepen the lower
+          half rather than flatten the whole frame. */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900 via-ink-900/60 to-ink-900/25"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-900/80 via-ink-900/20 to-transparent"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900 via-ink-900/45 to-transparent"
       />
 
       <div className="container-page relative pb-14 pt-32 md:pb-20">
         <p className="flex items-center gap-3 text-eyebrow uppercase text-bone-300">
           <span aria-hidden className="h-px w-8 bg-brass-400" />
-          Mumbai · since 2009
+          Pune · since 2009
         </p>
 
         <h1 className="mt-7 max-w-5xl text-display text-white text-balance">

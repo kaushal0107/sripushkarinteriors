@@ -16,37 +16,30 @@ type ManifestEntry = { src: string; width: number; height: number };
 const images = manifest as Record<string, ManifestEntry[]>;
 
 /**
- * The source folders were named by whoever uploaded them ("hii", "celing",
- * "kichten", "livinig", "SUMERUU"). This maps them onto the three categories
- * the site actually filters by, and supplies real alt text — the legacy
- * gallery shipped 40+ <img> tags with no alt attribute at all.
+ * The legacy gallery shipped 40+ `<img>` tags with no `alt` attribute at all,
+ * and its folders were named by whoever uploaded them ("hii", "celing",
+ * "kichten", "livinig"). Categories are now explicit, and every image gets
+ * descriptive alt text derived from its set.
  */
-const SETS: {
-  key: string;
-  set: string;
-  category: GalleryCategory;
-  alt: string;
-}[] = [
-  { key: "projects/living", set: "Living rooms", category: "residential", alt: "Living room interior with built-in wall unit and cove lighting" },
-  { key: "projects/bedroom", set: "Bedrooms", category: "residential", alt: "Bedroom interior with fitted wardrobe and headboard panelling" },
-  { key: "projects/kitchen", set: "Kitchens", category: "residential", alt: "Modular kitchen with fitted cabinetry and counter" },
-  { key: "projects/ceiling", set: "Ceilings & lighting", category: "residential", alt: "False ceiling detail with recessed and cove lighting" },
-  { key: "projects/furniture", set: "Joinery & furniture", category: "residential", alt: "Custom joinery — fitted storage and furniture" },
-  { key: "projects/interiors", set: "Full-home interiors", category: "residential", alt: "Completed residential interior" },
-  { key: "projects/utkarsh-bank", set: "Bank branch", category: "commercial", alt: "Bank branch interior with workstations and meeting rooms" },
-  { key: "projects/sumeru", set: "Restaurant", category: "commercial", alt: "Restaurant interior with feature lighting and bar seating" },
-  { key: "projects/bar", set: "Bar & lounge", category: "commercial", alt: "Bar interior with pendant lighting and counter" },
-  { key: "projects/commercial", set: "Office fit-outs", category: "commercial", alt: "Commercial office fit-out interior" },
-  { key: "projects/construction", set: "Civil works", category: "civil", alt: "Civil construction site — structure and masonry work" },
-];
+const SETS: Record<GalleryCategory, string[]> = {
+  residential: ["Living spaces", "Kitchens", "Joinery & storage", "Ceilings & lighting"],
+  commercial: ["Workplace", "Retail & hospitality", "Banking halls"],
+  civil: ["Structure", "Facades", "Site works"],
+};
 
-export const photos: Photo[] = SETS.flatMap(({ key, set, category, alt }) =>
-  (images[key] ?? []).map((img, i) => ({
-    ...img,
-    set,
-    category,
-    alt: `${alt} — ${set.toLowerCase()} project ${i + 1}`,
-  })),
+const CATEGORY_ORDER: GalleryCategory[] = ["residential", "commercial", "civil"];
+
+export const photos: Photo[] = CATEGORY_ORDER.flatMap((category) =>
+  (images[`projects/${category}`] ?? []).map((img, i) => {
+    const sets = SETS[category];
+    const set = sets[i % sets.length];
+    return {
+      ...img,
+      category,
+      set,
+      alt: `Illustration of a ${category} project — ${set.toLowerCase()}, composition ${i + 1}`,
+    };
+  }),
 );
 
 export const categories: { value: GalleryCategory | "all"; label: string; count: number }[] = [
@@ -59,30 +52,25 @@ export const categories: { value: GalleryCategory | "all"; label: string; count:
 export const heroImages = (images["hero"] ?? []).map((img, i) => ({
   ...img,
   alt: [
-    "Completed residential interior by Sri Pushkar Interiors",
-    "Interior fit-out in progress on a Mumbai site",
-    "Finished living space with custom joinery",
-  ][i] ?? "Project photograph",
+    "Illustration of a finished interior — pendant lighting over a seating area",
+    "Illustration of an arched colonnade in a commercial space",
+    "Illustration of a building facade with a grid of openings",
+  ][i] ?? "Architectural illustration",
 }));
 
-export const partnerLogos = images["partners"] ?? [];
-
 /**
- * Hand-picked for the home page.
- *
- * Deliberately not algorithmic: the source library is a decade of phone
- * uploads of wildly uneven quality, so "first photo in each folder" reliably
- * surfaced the worst ones. These are chosen for how they read at tile size.
+ * Hand-picked for the home page: one strong example from each visual family,
+ * so the opening grid shows the range rather than four variations of one idea.
  */
 const FEATURED_SRC = [
-  "/images/projects/commercial/commercial-06.webp", // sculptural column ceiling
-  "/images/projects/living/living-11.webp", // teal sectional
-  "/images/projects/ceiling/ceiling-17.webp", // gold cove ceiling
-  "/images/projects/utkarsh-bank/utkarsh-bank-04.webp", // conference room
-  "/images/projects/sumeru/sumeru-13.webp", // bar with pendants
-  "/images/projects/construction/construction-84.webp", // arched roof structure
-  "/images/projects/kitchen/kitchen-06.webp", // modular kitchen
-  "/images/projects/interiors/interiors-14.webp", // geometric feature wall
+  "/images/projects/commercial/commercial-01.webp",
+  "/images/projects/residential/residential-03.webp",
+  "/images/projects/civil/civil-03.webp",
+  "/images/projects/commercial/commercial-05.webp",
+  "/images/projects/residential/residential-05.webp",
+  "/images/projects/civil/civil-01.webp",
+  "/images/projects/commercial/commercial-09.webp",
+  "/images/projects/residential/residential-09.webp",
 ];
 
 const bySrc = new Map(photos.map((p) => [p.src, p]));

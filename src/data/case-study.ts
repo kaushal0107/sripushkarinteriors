@@ -2,16 +2,28 @@
  * Measurements for the rebuild write-up.
  *
  * Every number here was taken on one machine, in one sitting, with both
- * versions served locally from the same laptop — the v1 site restored from
- * commit 8b4d0cc and the rebuild running `next start` on a production build.
- * Nothing is estimated. The harness lives in `scripts/` and the method is
- * described on the page itself.
+ * versions served locally — the v1 site restored from commit 8b4d0cc and the
+ * rebuild running `next start` on a production build. Nothing is estimated.
+ * The harness is `scripts/benchmark.mjs`.
  */
+
+export const disclosure = {
+  heading: "What is real here, and what is not",
+  body: [
+    "This started as a real site for a real firm, written in 2019. For a public portfolio the client's identity has been removed entirely: the company name, domain, address, telephone numbers, staff and customers are invented, and the project photography — a working archive that included identifiable people and client premises — has been replaced with architectural compositions generated from a script.",
+    "What is real is everything a reviewer would actually want to assess: the architecture, the accessibility work, the defects found in the v1 source, and the measurements below.",
+  ],
+} as const;
 
 export const benchmark = {
   method:
     "Chrome 141, Fast 3G network emulation (1.6 Mbps down, 150 ms RTT) with 4× CPU throttling, 1440×900 viewport, cold cache, home page only.",
   date: "August 2026",
+  /**
+   * The like-for-like comparison: both columns loading the same photographs.
+   * This is the one that measures the engineering, because the content is held
+   * constant across it.
+   */
   rows: [
     { metric: "Page weight", legacy: "6,047 KB", rebuild: "1,611 KB", delta: "−73%", better: true },
     { metric: "Image bytes", legacy: "5,159 KB", rebuild: "328 KB", delta: "−94%", better: true },
@@ -22,12 +34,37 @@ export const benchmark = {
     { metric: "Largest Contentful Paint", legacy: "2,036 ms", rebuild: "716 ms", delta: "−65%", better: true },
     { metric: "Load event", legacy: "27,159 ms", rebuild: "4,206 ms", delta: "−85%", better: true },
   ],
+  caveat:
+    "Both columns above load the same photographs — the v1 originals, and the same originals put through the image pipeline. That is deliberate: holding the content constant is the only way the numbers measure engineering rather than a change of subject matter.",
+  /** What this build actually ships, now that the photography has been swapped. */
+  current: {
+    note: "The published build serves generated artwork instead, which is flat vector-derived colour and compresses far better than a photograph ever will. Those numbers are listed for completeness, not as a like-for-like result — a 99% drop in image bytes here is a change of content, not an optimisation.",
+    rows: [
+      { metric: "Page weight", value: "1,289 KB" },
+      { metric: "Image bytes", value: "19 KB" },
+      { metric: "Largest Contentful Paint", value: "708 ms" },
+      { metric: "Load event", value: "2,034 ms" },
+      { metric: "Cumulative Layout Shift", value: "0" },
+    ],
+  },
 } as const;
 
 export const repoStats = [
-  { value: "280 MB → 9 MB", label: "Image library", detail: "401 camera dumps → 136 curated WebP" },
-  { value: "2,593 → 0", label: "Lines of copy-pasted HTML", detail: "Six near-identical pages → shared components" },
-  { value: "10.5 MB", label: "Vendored jQuery, Bootstrap & icon fonts removed", detail: "Now zero runtime UI dependencies" },
+  {
+    value: "280 MB → 8.7 MB",
+    label: "Original image library",
+    detail: "401 camera dumps → 126 curated WebP, before the portfolio swap",
+  },
+  {
+    value: "2,593 → 0",
+    label: "Lines of copy-pasted HTML",
+    detail: "Six near-identical pages → shared components",
+  },
+  {
+    value: "10.5 MB",
+    label: "Vendored jQuery, Bootstrap & icon fonts removed",
+    detail: "Now zero runtime UI dependencies",
+  },
   { value: "38 → 0", label: "!important declarations", detail: "Replaced by a token-driven scale" },
 ] as const;
 
@@ -47,7 +84,7 @@ export const findings = [
     problem: "280 MB of untouched camera uploads",
     detail:
       "401 image files, several over 2 MB, served at full resolution to phones — filenames like \"WhatsApp Image 2020-09-05 at 12.28.46 AM.jpeg\". The home page alone pulled 5.2 MB of images, and the full load took 27 seconds on throttled mobile.",
-    fix: "A sharp-based pipeline resizes and converts everything to WebP, EXIF rotation applied. A manual editorial pass cut 401 files to 136 that are actually worth showing. next/image handles per-breakpoint sizing and lazy loading from there.",
+    fix: "A sharp-based pipeline that resizes and converts to WebP with EXIF rotation applied, taking the library to 8.7 MB. A manual editorial pass cut 401 files to the 126 worth showing. next/image handles per-breakpoint sizing and lazy loading from there.",
   },
   {
     tag: "Accessibility",
@@ -63,7 +100,7 @@ export const findings = [
     problem: "Statistics that contradicted themselves",
     detail:
       "The home page counter claimed 879 happy customers and 954 expert designers — more designers than clients — alongside \"8 Cities | 16 Experience Centers\", copied verbatim from a national competitor's site. Four service cards still carried lorem-ipsum: \"For what reason would it be advisable for me to think about business content?\"",
-    fix: "Replaced with claims the work supports: years in practice, projects delivered, scope of the turnkey contract, warranty terms. Every service now describes what is actually included.",
+    fix: "Replaced with internally consistent claims: years in practice, projects delivered, scope of the turnkey contract, warranty terms. Every service now describes what is actually included.",
   },
   {
     tag: "Maintainability",
@@ -79,7 +116,7 @@ export const findings = [
     problem: "Media queries that broke small screens",
     detail:
       "The mobile breakpoint set min-width: 400px on nine different selectors, so anything narrower than 400px got a horizontal scrollbar. The hero was pulled under the navbar with margin-top: -140px and forced to height: 650px !important, which letterboxed on desktop and cropped to nothing on a phone.",
-    fix: "Fluid type via clamp(), intrinsic layouts with grid and flexbox, and a hero sized in svh units with object-fit: cover. Verified from 320px up.",
+    fix: "Fluid type via clamp(), intrinsic layouts with grid and flexbox, and a hero sized in svh units with object-fit: cover. Verified with no horizontal overflow from 320px up, by script.",
   },
   {
     tag: "SEO",
@@ -87,7 +124,15 @@ export const findings = [
     problem: "No metadata worth the name",
     detail:
       "index.html had no charset declaration and the title \"Homepage\". Not one of the six pages had a meta description, Open Graph tag, canonical URL or structured data. services.html was titled \"Services-->Civil & Construction\".",
-    fix: "Per-page metadata through the Next.js Metadata API, OG and Twitter cards, canonical URLs, a generated sitemap and robots.txt, and GeneralContractor JSON-LD carrying the real address and phone numbers.",
+    fix: "Per-page metadata through the Next.js Metadata API, OG and Twitter cards, canonical URLs, a generated sitemap and robots.txt, and GeneralContractor JSON-LD reading from the same data module as the pages.",
+  },
+  {
+    tag: "Privacy",
+    severity: "medium",
+    problem: "Third-party embeds and other people's trademarks",
+    detail:
+      "The contact page loaded a Google Maps iframe on every visit, so every visitor picked up Google's cookies whether or not they wanted a map. The about page carried real, trademarked client logos — several duplicated, one of them a screenshot of a transparent PNG complete with the checkerboard — plus photographs of four identifiable staff, filenames intact.",
+    fix: "The map is click-to-load, showing the address and a direct link until someone asks for it. Client marks and staff portraits are now generated placeholders for fictional people and companies.",
   },
   {
     tag: "Dead code",
@@ -102,18 +147,18 @@ export const findings = [
 export const decisions = [
   {
     q: "Why Next.js for a five-page brochure site?",
-    a: "Honestly, a static site generator would serve the business equally well — the pages are static and the only dynamic surface is one form. Next earns its place here for the image pipeline (next/image doing per-breakpoint WebP and AVIF against a library of 136 photos is the single biggest win on the page) and for giving the contact form a typed server route without standing up separate infrastructure. The cost is visible in the numbers: JavaScript went up from 320 KB to 841 KB. That is the trade, and it is the one metric on this page that got worse.",
+    a: "Honestly, a static site generator would serve the business equally well — the pages are static and the only dynamic surface is one form. Next earns its place for the image pipeline (next/image doing per-breakpoint WebP and AVIF against a library of 130-odd images is the single biggest win on the page) and for giving the contact form a typed server route without standing up separate infrastructure. The cost is visible in the numbers: JavaScript went from 320 KB to 841 KB. That is the trade, and it is the one metric on this page that got worse.",
   },
   {
-    q: "Why keep the original photographs at all?",
-    a: "Because they are the firm's actual work, and a portfolio of stock photography would be a lie. The constraint is real though: 91 of the 136 surviving images are under 800px wide, since they were phone uploads from 2014–2020. The layout is designed around that — tiles are capped at sizes those files can fill honestly, the hero uses the only three photographs above 1000px, and nothing is stretched full-bleed that cannot carry it.",
+    q: "Why generate the imagery instead of using stock photographs?",
+    a: "Stock photography would imply the firm completed work it never did, on a site that is already fictional — a second layer of untruth for no gain. Generated compositions are unmistakably illustrative, they are authored in the same palette as the rest of the design so the page holds together, and they regenerate deterministically from about 300 lines rather than sitting in git as binaries nobody can review. The trade-off is that flat vector art compresses far better than a photograph, which is why the headline benchmark deliberately compares against the real photographs instead.",
   },
   {
     q: "Why rewrite the copy?",
-    a: "The v1 text claimed more designers than customers, listed sixteen experience centres in eight cities that do not exist, and left lorem ipsum on the services page. Shipping that as portfolio work would mean vouching for it. The replacement describes a Mumbai contracting firm that has been trading since 2009, which is what this is.",
+    a: "The v1 text claimed more designers than customers, listed sixteen experience centres in eight cities that did not exist, and left lorem ipsum on the services page. Shipping that as portfolio work would mean vouching for it. The replacement reads as a plausible contracting firm because the writing is specific — bills of quantities, defects periods, payment stages — not because any of the particulars are real.",
   },
   {
-    q: "What would need to change before this went live?",
-    a: "Three things. The rate limiter is an in-process Map, which is correct for a single instance and wrong the moment the site scales horizontally — that wants Upstash or equivalent. Email delivery needs RESEND_API_KEY and CONTACT_TO_EMAIL set, and without them the route logs instead of sending. And the team photographs and partner logos should be replaced with images the firm has explicit permission to publish.",
+    q: "What would need to change before something like this went live?",
+    a: "Three things. The rate limiter is an in-process Map, which is correct for a single instance and wrong the moment the site scales horizontally — that wants Upstash or equivalent. Email delivery needs RESEND_API_KEY and CONTACT_TO_EMAIL set, and without them the route validates and logs instead of sending. And a real deployment would want real photography, which is a brief for a photographer rather than an engineering problem.",
   },
 ] as const;

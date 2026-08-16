@@ -10,16 +10,16 @@ import { faqs, process, services } from "@/data/site";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Residential interiors, commercial fit-outs, civil construction and turnkey project management in Mumbai — priced from an itemised bill of quantities.",
+    "Residential interiors, commercial fit-outs, civil construction and turnkey project management in Pune — priced from an itemised bill of quantities.",
   alternates: { canonical: "/services" },
 };
 
 /** One representative photograph per service, picked by hand. */
 const SERVICE_IMAGE: Record<string, string> = {
-  residential: "/images/projects/living/living-11.webp",
-  commercial: "/images/projects/utkarsh-bank/utkarsh-bank-05.webp",
-  civil: "/images/projects/construction/construction-24.webp",
-  turnkey: "/images/projects/commercial/commercial-06.webp",
+  residential: "/images/projects/residential/residential-03.webp",
+  commercial: "/images/projects/commercial/commercial-01.webp",
+  civil: "/images/projects/civil/civil-01.webp",
+  turnkey: "/images/projects/commercial/commercial-05.webp",
 };
 
 export default function ServicesPage() {
@@ -82,7 +82,7 @@ export default function ServicesPage() {
                   <Button href="/contact">Discuss a project</Button>
                   {service.gallery !== "all" && (
                     <span className="text-sm text-ink-400">
-                      {count} photographs in the {service.gallery} gallery
+                      {count} pieces in the {service.gallery} gallery
                     </span>
                   )}
                 </div>

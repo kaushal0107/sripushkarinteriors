@@ -1,14 +1,16 @@
+import { site } from "@/data/site";
+
 /**
- * Vector redraw of the firm's logo.
+ * Wordmark.
  *
- * The original asset was a 600×196 PNG with a grey drop shadow baked into the
- * pixels and a semi-opaque halo around the star. It could not be recoloured for
- * a dark background — inverting it produced a white smudge — and it was the
- * heaviest above-the-fold request on the page.
+ * The v1 logo was a 600×196 PNG with a grey drop shadow baked into the pixels
+ * and a semi-opaque halo around the mark. It could not be recoloured for a dark
+ * background — inverting it produced a white smudge — and it was the heaviest
+ * above-the-fold request on the page.
  *
- * This keeps the identity (eight-point star mandala + the two-line lockup) but
- * draws it in ~2KB of markup that inherits `currentColor`, so the same mark
- * works on the transparent hero, the light header and the dark footer.
+ * This is drawn in ~2KB of markup that inherits `currentColor`, so one mark
+ * serves the transparent hero, the light header and the dark footer. The name
+ * is fictional, like the rest of the content — see src/data/site.ts.
  */
 export function Wordmark({
   className = "",
@@ -22,11 +24,11 @@ export function Wordmark({
       <Mark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
       <span className="flex flex-col leading-none">
         <span className="font-display text-xl tracking-tight md:text-2xl">
-          sri pushkar
+          {site.name.toLowerCase()}
         </span>
         {showTagline && (
           <span className="mt-1 text-[0.5rem] uppercase tracking-[0.2em] opacity-70 md:text-[0.55rem]">
-            Interiors &amp; Civil Contractor
+            Interiors &amp; Contracts
           </span>
         )}
       </span>

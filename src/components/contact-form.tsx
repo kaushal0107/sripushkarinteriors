@@ -219,7 +219,7 @@ export function ContactForm() {
           id={fieldId("message")}
           name="message"
           rows={5}
-          placeholder="2BHK in Kandivali East, roughly 850 sq ft. Looking to start after Diwali."
+          placeholder="2BHK in Baner, roughly 850 sq ft. Looking to start after Diwali."
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? errorId("message") : undefined}
           className={`${inputClass} resize-y`}

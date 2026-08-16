@@ -11,7 +11,8 @@ export function SiteFooter() {
           <div>
             <Wordmark className="text-bone-100" />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-bone-400">
-              Turnkey interiors and civil contracting in Mumbai since {site.founded}.
+              Turnkey interiors and civil contracting in {site.address.city} since{" "}
+              {site.founded}.
               Design, materials, labour and supervision under one contract.
             </p>
           </div>
@@ -97,12 +98,28 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-bone-400 sm:flex-row sm:items-center sm:justify-between">
+        {site.isDemo && (
+          <p className="mt-14 rounded-sm border border-white/10 bg-white/5 px-5 py-4 text-xs leading-relaxed text-bone-400">
+            <strong className="font-medium text-bone-200">Portfolio demonstration.</strong>{" "}
+            {site.legalName} is not a real company. The name, address, telephone
+            numbers, staff, clients and imagery on this site are all invented —
+            it is a front-end engineering exercise rebuilt from a site the
+            author wrote in 2019. The{" "}
+            <Link href="/case-study" className="underline underline-offset-2 hover:text-brass-300">
+              rebuild notes
+            </Link>{" "}
+            explain what is real and what is not.
+          </p>
+        )}
+
+        <div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-bone-400 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.legalName}. All rights reserved.
+            © {new Date().getFullYear()} {site.legalName} — fictional firm, demo site.
           </p>
           <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span>Mumbai, Maharashtra</span>
+            <span>
+              {site.address.city}, {site.address.region}
+            </span>
             <Link href="/case-study" className="inline-block py-1 transition hover:text-brass-300">
               Colophon &amp; rebuild notes
             </Link>

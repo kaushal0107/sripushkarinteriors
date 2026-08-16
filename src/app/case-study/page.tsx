@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Reveal } from "@/components/reveal";
 import { Section, SectionHeading } from "@/components/ui";
-import { benchmark, decisions, findings, repoStats } from "@/data/case-study";
+import { benchmark, decisions, disclosure, findings, repoStats } from "@/data/case-study";
 
 export const metadata: Metadata = {
   title: "Rebuild case study",
@@ -48,7 +48,20 @@ export default function CaseStudyPage() {
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      <Section className="py-16 md:py-24">
+      <Section className="py-14 md:py-20">
+        <div className="container-page">
+          <div className="max-w-3xl rounded-sm border border-brass-300/60 bg-brass-300/10 p-6 md:p-8">
+            <h2 className="text-h3">{disclosure.heading}</h2>
+            {disclosure.body.map((paragraph) => (
+              <p key={paragraph} className="mt-4 leading-relaxed text-ink-600 text-pretty">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section className="pt-0 pb-16 md:pb-24">
         <div className="container-page grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
           {repoStats.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
@@ -66,7 +79,7 @@ export default function CaseStudyPage() {
           <SectionHeading
             eyebrow="Measured"
             title="Same laptop, same network, both versions"
-            intro="Both builds served locally and loaded cold. The one row that got worse is left in."
+            intro="Both builds served locally and loaded cold, loading the same photographs. The one row that got worse is left in."
           />
 
           <div className="mt-12 overflow-x-auto">
@@ -115,7 +128,27 @@ export default function CaseStudyPage() {
             </table>
           </div>
 
-          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-ink-400">
+          <p className="mt-8 max-w-3xl leading-relaxed text-ink-600 text-pretty">
+            <strong className="font-medium text-ink-900">Why photographs on both sides.</strong>{" "}
+            {benchmark.caveat}
+          </p>
+
+          <div className="mt-10 max-w-3xl rounded-sm border border-bone-300 bg-bone-50 p-6 md:p-8">
+            <h3 className="text-h3">What this build actually ships</h3>
+            <p className="mt-3 leading-relaxed text-ink-500 text-pretty">
+              {benchmark.current.note}
+            </p>
+            <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
+              {benchmark.current.rows.map((row) => (
+                <div key={row.metric} className="border-t border-bone-300 pt-3">
+                  <dt className="text-xs uppercase tracking-wider text-ink-400">{row.metric}</dt>
+                  <dd className="mt-1 font-mono text-sm tabular-nums text-ink-900">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <p className="mt-8 max-w-3xl text-sm leading-relaxed text-ink-400">
             <strong className="font-medium text-ink-600">Method.</strong>{" "}
             {benchmark.method} Measured {benchmark.date}. Largest Contentful
             Paint and Cumulative Layout Shift were collected with a buffered
@@ -132,7 +165,7 @@ export default function CaseStudyPage() {
           <SectionHeading
             eyebrow="Findings"
             title="What was actually wrong"
-            intro="Eight issues found reading the v1 source, in rough order of how much they mattered."
+            intro="Nine issues found reading the v1 source, in rough order of how much they mattered."
           />
 
           <ol className="mt-14 space-y-px overflow-hidden rounded-sm bg-bone-200">
@@ -215,7 +248,7 @@ export default function CaseStudyPage() {
               ["Framework", "Next.js 16, App Router, React 19"],
               ["Language", "TypeScript, strict mode"],
               ["Styling", "Tailwind CSS v4, tokens defined in @theme"],
-              ["Images", "sharp pipeline → WebP, served through next/image"],
+              ["Images", "Generated SVG → WebP via sharp, served through next/image"],
               ["Forms", "Zod schema shared by client and server route"],
               ["Type", "Fraunces and Inter, self-hosted via next/font"],
               ["Runtime deps", "React, Next and Zod — nothing else"],

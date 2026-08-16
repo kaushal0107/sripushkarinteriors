@@ -27,7 +27,7 @@ export default function HomePage() {
 
           <Reveal delay={120} className="space-y-6 text-lg leading-relaxed text-ink-500">
             <p className="text-pretty">
-              Most interior jobs in Mumbai fail in the gap between the person who
+              Most interior jobs fail in the gap between the person who
               drew it and the people who build it. We closed that gap by doing
               both — the same firm produces the drawings, prices the bill of
               quantities, buys the material and runs the site.

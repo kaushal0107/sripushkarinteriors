@@ -10,7 +10,7 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Book a free site visit and estimate with Sri Pushkar Interiors in Kandivali East, Mumbai. Call +91 79772 52528 or send an enquiry.",
+    "Book a free site visit and estimate with Meridian Interiors in Pune. Call +91 98765 43210 or send an enquiry.",
   alternates: { canonical: "/contact" },
 };
 

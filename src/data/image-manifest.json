@@ -1,788 +1,244 @@
 {
-  "brand": [
-    {
-      "src": "/images/brand/logo.png",
-      "width": 600,
-      "height": 167,
-      "bytes": 48415
-    }
-  ],
   "hero": [
     {
       "src": "/images/hero/hero-01.webp",
-      "width": 1024,
-      "height": 683,
-      "bytes": 63570
+      "width": 2400,
+      "height": 1350,
+      "bytes": 11904
     },
     {
       "src": "/images/hero/hero-02.webp",
-      "width": 1280,
-      "height": 888,
-      "bytes": 144244
+      "width": 2400,
+      "height": 1350,
+      "bytes": 11628
     },
     {
       "src": "/images/hero/hero-03.webp",
       "width": 2400,
-      "height": 1353,
-      "bytes": 441772
+      "height": 1350,
+      "bytes": 11996
     }
   ],
-  "partners": [
+  "projects/civil": [
     {
-      "src": "/images/partners/partner-01.webp",
-      "width": 224,
-      "height": 86,
-      "bytes": 2046
+      "src": "/images/projects/civil/civil-01.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 12596
     },
     {
-      "src": "/images/partners/partner-02.webp",
-      "width": 295,
-      "height": 102,
-      "bytes": 6510
+      "src": "/images/projects/civil/civil-02.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6338
     },
     {
-      "src": "/images/partners/partner-04.webp",
-      "width": 229,
-      "height": 220,
-      "bytes": 5890
+      "src": "/images/projects/civil/civil-03.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6862
     },
     {
-      "src": "/images/partners/partner-05.webp",
-      "width": 358,
-      "height": 141,
-      "bytes": 9364
+      "src": "/images/projects/civil/civil-04.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6178
     },
     {
-      "src": "/images/partners/partner-06.webp",
-      "width": 225,
-      "height": 225,
-      "bytes": 2992
+      "src": "/images/projects/civil/civil-05.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6522
     },
     {
-      "src": "/images/partners/partner-08.webp",
-      "width": 300,
-      "height": 168,
-      "bytes": 6960
+      "src": "/images/projects/civil/civil-06.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 5924
     },
     {
-      "src": "/images/partners/partner-10.webp",
-      "width": 405,
-      "height": 124,
-      "bytes": 5128
+      "src": "/images/projects/civil/civil-07.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 10980
     },
     {
-      "src": "/images/partners/partner-12.webp",
-      "width": 318,
-      "height": 159,
-      "bytes": 3032
+      "src": "/images/projects/civil/civil-08.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6572
     },
     {
-      "src": "/images/partners/partner-13.webp",
-      "width": 450,
-      "height": 450,
-      "bytes": 5122
-    }
-  ],
-  "projects/bar": [
-    {
-      "src": "/images/projects/bar/bar-01.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 23148
-    },
-    {
-      "src": "/images/projects/bar/bar-02.webp",
-      "width": 271,
-      "height": 375,
-      "bytes": 19462
-    },
-    {
-      "src": "/images/projects/bar/bar-03.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 19876
-    },
-    {
-      "src": "/images/projects/bar/bar-04.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 24830
-    }
-  ],
-  "projects/bedroom": [
-    {
-      "src": "/images/projects/bedroom/bedroom-01.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 28680
-    },
-    {
-      "src": "/images/projects/bedroom/bedroom-03.webp",
-      "width": 500,
-      "height": 374,
-      "bytes": 15592
-    },
-    {
-      "src": "/images/projects/bedroom/bedroom-06.webp",
-      "width": 500,
-      "height": 888,
-      "bytes": 27130
-    },
-    {
-      "src": "/images/projects/bedroom/bedroom-07.webp",
-      "width": 780,
-      "height": 1040,
-      "bytes": 28924
-    }
-  ],
-  "projects/ceiling": [
-    {
-      "src": "/images/projects/ceiling/ceiling-03.webp",
-      "width": 300,
-      "height": 368,
-      "bytes": 8876
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-04.webp",
-      "width": 300,
-      "height": 168,
-      "bytes": 5060
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-05.webp",
-      "width": 300,
-      "height": 168,
-      "bytes": 4110
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-07.webp",
-      "width": 300,
-      "height": 168,
-      "bytes": 6640
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-08.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 14032
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-10.webp",
-      "width": 300,
-      "height": 169,
-      "bytes": 1650
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-15.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 6878
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-16.webp",
-      "width": 300,
-      "height": 168,
-      "bytes": 4828
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-17.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 6296
-    },
-    {
-      "src": "/images/projects/ceiling/ceiling-20.webp",
-      "width": 350,
-      "height": 174,
-      "bytes": 8092
+      "src": "/images/projects/civil/civil-09.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6748
     }
   ],
   "projects/commercial": [
     {
+      "src": "/images/projects/commercial/commercial-01.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8464
+    },
+    {
+      "src": "/images/projects/commercial/commercial-02.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7364
+    },
+    {
+      "src": "/images/projects/commercial/commercial-03.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8054
+    },
+    {
+      "src": "/images/projects/commercial/commercial-04.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8630
+    },
+    {
       "src": "/images/projects/commercial/commercial-05.webp",
-      "width": 495,
-      "height": 455,
-      "bytes": 38418
+      "width": 1600,
+      "height": 1200,
+      "bytes": 9762
     },
     {
       "src": "/images/projects/commercial/commercial-06.webp",
-      "width": 464,
-      "height": 278,
-      "bytes": 22950
+      "width": 1600,
+      "height": 1200,
+      "bytes": 15912
+    },
+    {
+      "src": "/images/projects/commercial/commercial-07.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8814
     },
     {
       "src": "/images/projects/commercial/commercial-08.webp",
-      "width": 392,
-      "height": 280,
-      "bytes": 17578
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8590
     },
     {
       "src": "/images/projects/commercial/commercial-09.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 15786
-    },
-    {
-      "src": "/images/projects/commercial/commercial-15.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 18370
-    },
-    {
-      "src": "/images/projects/commercial/commercial-16.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 21686
-    },
-    {
-      "src": "/images/projects/commercial/commercial-17.webp",
-      "width": 373,
-      "height": 546,
-      "bytes": 14784
-    },
-    {
-      "src": "/images/projects/commercial/commercial-19.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 29720
-    },
-    {
-      "src": "/images/projects/commercial/commercial-24.webp",
-      "width": 379,
-      "height": 479,
-      "bytes": 12292
-    },
-    {
-      "src": "/images/projects/commercial/commercial-25.webp",
-      "width": 500,
-      "height": 824,
-      "bytes": 20422
-    },
-    {
-      "src": "/images/projects/commercial/commercial-30.webp",
-      "width": 500,
-      "height": 666,
-      "bytes": 40062
-    },
-    {
-      "src": "/images/projects/commercial/commercial-33.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 7812
-    },
-    {
-      "src": "/images/projects/commercial/commercial-35.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 15614
-    },
-    {
-      "src": "/images/projects/commercial/commercial-37.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 17704
-    },
-    {
-      "src": "/images/projects/commercial/commercial-39.webp",
-      "width": 500,
-      "height": 598,
-      "bytes": 13010
-    },
-    {
-      "src": "/images/projects/commercial/commercial-46.webp",
-      "width": 350,
-      "height": 381,
-      "bytes": 10926
-    }
-  ],
-  "projects/construction": [
-    {
-      "src": "/images/projects/construction/construction-06.webp",
-      "width": 1280,
-      "height": 720,
-      "bytes": 39602
-    },
-    {
-      "src": "/images/projects/construction/construction-09.webp",
-      "width": 1280,
-      "height": 720,
-      "bytes": 49932
-    },
-    {
-      "src": "/images/projects/construction/construction-13.webp",
-      "width": 1200,
-      "height": 1600,
-      "bytes": 93626
-    },
-    {
-      "src": "/images/projects/construction/construction-15.webp",
-      "width": 1280,
-      "height": 960,
-      "bytes": 67674
-    },
-    {
-      "src": "/images/projects/construction/construction-17.webp",
-      "width": 1052,
-      "height": 780,
-      "bytes": 102756
-    },
-    {
-      "src": "/images/projects/construction/construction-18.webp",
-      "width": 1052,
-      "height": 780,
-      "bytes": 92124
-    },
-    {
-      "src": "/images/projects/construction/construction-21.webp",
-      "width": 1052,
-      "height": 780,
-      "bytes": 137162
-    },
-    {
-      "src": "/images/projects/construction/construction-22.webp",
-      "width": 1280,
-      "height": 960,
-      "bytes": 264880
-    },
-    {
-      "src": "/images/projects/construction/construction-24.webp",
-      "width": 1280,
-      "height": 960,
-      "bytes": 361726
-    },
-    {
-      "src": "/images/projects/construction/construction-26.webp",
       "width": 1600,
       "height": 1200,
-      "bytes": 324006
+      "bytes": 7970
     },
     {
-      "src": "/images/projects/construction/construction-29.webp",
-      "width": 1800,
-      "height": 1012,
-      "bytes": 264744
+      "src": "/images/projects/commercial/commercial-10.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8594
     },
     {
-      "src": "/images/projects/construction/construction-34.webp",
-      "width": 1800,
-      "height": 1012,
-      "bytes": 418504
+      "src": "/images/projects/commercial/commercial-11.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 14372
     },
     {
-      "src": "/images/projects/construction/construction-39.webp",
-      "width": 1728,
-      "height": 3072,
-      "bytes": 1120580
-    },
-    {
-      "src": "/images/projects/construction/construction-45.webp",
-      "width": 1800,
-      "height": 1012,
-      "bytes": 152458
-    },
-    {
-      "src": "/images/projects/construction/construction-47.webp",
-      "width": 1800,
-      "height": 1012,
-      "bytes": 127774
-    },
-    {
-      "src": "/images/projects/construction/construction-53.webp",
-      "width": 1800,
-      "height": 1350,
-      "bytes": 157826
-    },
-    {
-      "src": "/images/projects/construction/construction-55.webp",
-      "width": 1800,
-      "height": 2400,
-      "bytes": 621330
-    },
-    {
-      "src": "/images/projects/construction/construction-59.webp",
-      "width": 1800,
-      "height": 2400,
-      "bytes": 548974
-    },
-    {
-      "src": "/images/projects/construction/construction-76.webp",
-      "width": 1800,
-      "height": 3193,
-      "bytes": 426672
-    },
-    {
-      "src": "/images/projects/construction/construction-84.webp",
-      "width": 1800,
-      "height": 1015,
-      "bytes": 117536
-    },
-    {
-      "src": "/images/projects/construction/construction-85.webp",
-      "width": 1800,
-      "height": 1015,
-      "bytes": 232106
-    },
-    {
-      "src": "/images/projects/construction/construction-87.webp",
-      "width": 1800,
-      "height": 1350,
-      "bytes": 386684
+      "src": "/images/projects/commercial/commercial-12.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 13754
     }
   ],
-  "projects/furniture": [
+  "projects/residential": [
     {
-      "src": "/images/projects/furniture/furniture-02.webp",
-      "width": 350,
-      "height": 466,
-      "bytes": 8640
+      "src": "/images/projects/residential/residential-01.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6332
     },
     {
-      "src": "/images/projects/furniture/furniture-03.webp",
-      "width": 350,
-      "height": 505,
-      "bytes": 9840
+      "src": "/images/projects/residential/residential-02.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8206
     },
     {
-      "src": "/images/projects/furniture/furniture-04.webp",
-      "width": 350,
-      "height": 1155,
-      "bytes": 18040
+      "src": "/images/projects/residential/residential-03.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7460
     },
     {
-      "src": "/images/projects/furniture/furniture-05.webp",
-      "width": 350,
-      "height": 255,
-      "bytes": 5328
+      "src": "/images/projects/residential/residential-04.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7154
     },
     {
-      "src": "/images/projects/furniture/furniture-14.webp",
-      "width": 350,
-      "height": 464,
-      "bytes": 21304
+      "src": "/images/projects/residential/residential-05.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6726
     },
     {
-      "src": "/images/projects/furniture/furniture-15.webp",
-      "width": 350,
-      "height": 462,
-      "bytes": 26546
+      "src": "/images/projects/residential/residential-06.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7440
     },
     {
-      "src": "/images/projects/furniture/furniture-20.webp",
-      "width": 350,
-      "height": 295,
-      "bytes": 9604
+      "src": "/images/projects/residential/residential-07.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7476
     },
     {
-      "src": "/images/projects/furniture/furniture-22.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 10288
+      "src": "/images/projects/residential/residential-08.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8372
     },
     {
-      "src": "/images/projects/furniture/furniture-26.webp",
-      "width": 350,
-      "height": 196,
-      "bytes": 8296
+      "src": "/images/projects/residential/residential-09.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6900
     },
     {
-      "src": "/images/projects/furniture/furniture-30.webp",
-      "width": 350,
-      "height": 346,
-      "bytes": 8398
+      "src": "/images/projects/residential/residential-10.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7132
     },
     {
-      "src": "/images/projects/furniture/furniture-36.webp",
-      "width": 350,
-      "height": 391,
-      "bytes": 7836
+      "src": "/images/projects/residential/residential-11.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7834
     },
     {
-      "src": "/images/projects/furniture/furniture-42.webp",
-      "width": 350,
-      "height": 466,
-      "bytes": 21738
+      "src": "/images/projects/residential/residential-12.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7394
     },
     {
-      "src": "/images/projects/furniture/furniture-43.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 8246
+      "src": "/images/projects/residential/residential-13.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6552
     },
     {
-      "src": "/images/projects/furniture/furniture-44.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 9206
+      "src": "/images/projects/residential/residential-14.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8032
     },
     {
-      "src": "/images/projects/furniture/furniture-47.webp",
-      "width": 350,
-      "height": 197,
-      "bytes": 6844
-    },
-    {
-      "src": "/images/projects/furniture/furniture-53.webp",
-      "width": 350,
-      "height": 495,
-      "bytes": 13408
-    }
-  ],
-  "projects/interiors": [
-    {
-      "src": "/images/projects/interiors/interiors-04.webp",
-      "width": 350,
-      "height": 434,
-      "bytes": 22416
-    },
-    {
-      "src": "/images/projects/interiors/interiors-05.webp",
-      "width": 350,
-      "height": 423,
-      "bytes": 15170
-    },
-    {
-      "src": "/images/projects/interiors/interiors-06.webp",
-      "width": 350,
-      "height": 233,
-      "bytes": 26678
-    },
-    {
-      "src": "/images/projects/interiors/interiors-07.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 17978
-    },
-    {
-      "src": "/images/projects/interiors/interiors-08.webp",
-      "width": 350,
-      "height": 466,
-      "bytes": 13350
-    },
-    {
-      "src": "/images/projects/interiors/interiors-09.webp",
-      "width": 350,
-      "height": 273,
-      "bytes": 16216
-    },
-    {
-      "src": "/images/projects/interiors/interiors-10.webp",
-      "width": 350,
-      "height": 262,
-      "bytes": 14216
-    },
-    {
-      "src": "/images/projects/interiors/interiors-11.webp",
-      "width": 350,
-      "height": 248,
-      "bytes": 11848
-    },
-    {
-      "src": "/images/projects/interiors/interiors-13.webp",
-      "width": 350,
-      "height": 178,
-      "bytes": 11724
-    },
-    {
-      "src": "/images/projects/interiors/interiors-14.webp",
-      "width": 350,
-      "height": 525,
-      "bytes": 14938
-    }
-  ],
-  "projects/kitchen": [
-    {
-      "src": "/images/projects/kitchen/kitchen-02.webp",
-      "width": 1800,
-      "height": 3200,
-      "bytes": 304658
-    },
-    {
-      "src": "/images/projects/kitchen/kitchen-03.webp",
-      "width": 497,
-      "height": 247,
-      "bytes": 27340
-    },
-    {
-      "src": "/images/projects/kitchen/kitchen-05.webp",
-      "width": 500,
-      "height": 888,
-      "bytes": 58382
-    },
-    {
-      "src": "/images/projects/kitchen/kitchen-06.webp",
-      "width": 500,
-      "height": 888,
-      "bytes": 39196
-    },
-    {
-      "src": "/images/projects/kitchen/kitchen-08.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 15318
-    },
-    {
-      "src": "/images/projects/kitchen/kitchen-09.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 9784
-    },
-    {
-      "src": "/images/projects/kitchen/kitchen-12.webp",
-      "width": 500,
-      "height": 666,
-      "bytes": 19086
-    },
-    {
-      "src": "/images/projects/kitchen/kitchen-13.webp",
-      "width": 500,
-      "height": 666,
-      "bytes": 27386
-    }
-  ],
-  "projects/living": [
-    {
-      "src": "/images/projects/living/living-03.webp",
-      "width": 500,
-      "height": 888,
-      "bytes": 24866
-    },
-    {
-      "src": "/images/projects/living/living-08.webp",
-      "width": 1800,
-      "height": 3200,
-      "bytes": 254570
-    },
-    {
-      "src": "/images/projects/living/living-11.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 27506
-    },
-    {
-      "src": "/images/projects/living/living-13.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 13426
-    },
-    {
-      "src": "/images/projects/living/living-16.webp",
-      "width": 500,
-      "height": 281,
-      "bytes": 32568
-    },
-    {
-      "src": "/images/projects/living/living-17.webp",
-      "width": 500,
-      "height": 374,
-      "bytes": 10462
-    },
-    {
-      "src": "/images/projects/living/living-18.webp",
-      "width": 500,
-      "height": 374,
-      "bytes": 19080
-    }
-  ],
-  "projects/sumeru": [
-    {
-      "src": "/images/projects/sumeru/sumeru-08.webp",
-      "width": 500,
-      "height": 666,
-      "bytes": 50598
-    },
-    {
-      "src": "/images/projects/sumeru/sumeru-13.webp",
-      "width": 500,
-      "height": 666,
-      "bytes": 40654
-    },
-    {
-      "src": "/images/projects/sumeru/sumeru-19.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 23978
-    },
-    {
-      "src": "/images/projects/sumeru/sumeru-20.webp",
-      "width": 500,
-      "height": 666,
-      "bytes": 40394
-    },
-    {
-      "src": "/images/projects/sumeru/sumeru-21.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 18120
-    }
-  ],
-  "projects/utkarsh-bank": [
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-01.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 19230
-    },
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-02.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 21676
-    },
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-04.webp",
-      "width": 500,
-      "height": 416,
-      "bytes": 18402
-    },
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-05.webp",
-      "width": 500,
-      "height": 416,
-      "bytes": 19226
-    },
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-06.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 19336
-    },
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-07.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 16064
-    },
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-08.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 21840
-    },
-    {
-      "src": "/images/projects/utkarsh-bank/utkarsh-bank-10.webp",
-      "width": 500,
-      "height": 375,
-      "bytes": 17478
-    }
-  ],
-  "team": [
-    {
-      "src": "/images/team/team-01.webp",
-      "width": 657,
-      "height": 623,
-      "bytes": 60520
-    },
-    {
-      "src": "/images/team/team-02.webp",
-      "width": 657,
-      "height": 623,
-      "bytes": 14490
-    },
-    {
-      "src": "/images/team/team-03.webp",
-      "width": 657,
-      "height": 623,
-      "bytes": 17220
+      "src": "/images/projects/residential/residential-15.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7220
     }
   ]
 }

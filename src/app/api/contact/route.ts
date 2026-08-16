@@ -94,7 +94,7 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: process.env.CONTACT_FROM_EMAIL ?? "enquiries@sripushkarinteriors.com",
+          from: process.env.CONTACT_FROM_EMAIL ?? "website@meridian-interiors.example",
           to: [to],
           // The visitor's address goes in reply_to, never spliced into a header
           // string — this is the specific bug the PHP version had.
