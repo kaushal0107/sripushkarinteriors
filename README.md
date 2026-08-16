@@ -1,2 +1,193 @@
-# sripushkarinteriors
-Interior Designer &amp; Civil Contractor
+# Sri Pushkar Interiors
+
+Marketing site for a Mumbai interior design and civil contracting firm — rebuilt
+from the version I wrote as an undergraduate in 2019.
+
+**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Zod · sharp
+
+The write-up with the full before-and-after lives at [`/case-study`](src/app/case-study/page.tsx).
+The original site is preserved in git history at commit `8b4d0cc`.
+
+---
+
+## Why this repo exists twice
+
+The first version went up in 2019: Bootstrap 4 from a CDN, jQuery loaded three
+times on the home page, 280 MB of unresized phone photographs committed to git,
+and a PHP mail handler with an email header-injection hole. It worked, in the
+sense that it rendered.
+
+This is the same business, the same photographs and the same six pages, rebuilt.
+Everything below was measured, not estimated.
+
+## Measured, v1 vs. rebuild
+
+Chrome 141, Fast 3G emulation (1.6 Mbps, 150 ms RTT), 4× CPU throttling,
+1440×900, cold cache, home page. Both versions served locally from the same
+machine. Reproduce with `npm run benchmark`.
+
+| Metric | v1 (2019) | Rebuild | Change |
+| --- | ---: | ---: | ---: |
+| Page weight | 6,047 KB | 1,611 KB | **−73%** |
+| Image bytes | 5,159 KB | 328 KB | **−94%** |
+| CSS bytes | 232 KB | 46 KB | **−80%** |
+| JavaScript bytes | 320 KB | 841 KB | **+163%** |
+| HTTP requests | 35 | 29 | −17% |
+| First Contentful Paint | 1,120 ms | 716 ms | **−36%** |
+| Largest Contentful Paint | 2,036 ms | 716 ms | **−65%** |
+| Load event | 27,159 ms | 4,206 ms | **−85%** |
+
+The JavaScript row got worse. That is the cost of React and the Next runtime on
+a site whose pages are essentially static, and it is left in the table rather
+than quietly omitted. See [Trade-offs](#trade-offs).
+
+Repository-level:
+
+| | v1 | Rebuild |
+| --- | --- | --- |
+| Image library | 280 MB, 401 files | 9 MB, 131 curated WebP |
+| Copy-pasted page HTML | 2,593 lines across 6 files | shared components |
+| Vendored jQuery / Bootstrap / icon fonts | 10.5 MB | none |
+| `!important` declarations | 38 | 0 |
+| Hard-coded colour values | 37 | design tokens in `@theme` |
+
+## What was actually wrong
+
+Eight findings from reading the v1 source, worst first. Each is documented in
+full on `/case-study`.
+
+1. **Email header injection** (high) — `mail_handler.php` interpolated the
+   submitted address directly into a mail header (`"From: ".$email`), so a
+   newline let a caller append `Bcc:` headers and use the form as an open relay.
+   It also echoed the submitter's name back into HTML unescaped.
+2. **280 MB of untouched camera uploads** (high) — several over 2 MB, served at
+   full resolution to phones. The home page pulled 5.2 MB of images and took
+   27 seconds to finish loading on throttled mobile.
+3. **47 of 50 gallery images had no `alt`** (high) — and the gallery had no
+   keyboard path in at all: no focus styles anywhere on the site, and filter
+   controls built from `<li data-filter>` nested inside an `<h4>` inside a `<ul>`.
+4. **Statistics that contradicted themselves** (medium) — "879 Happy Customers"
+   alongside "954 Expert Designers", plus "8 Cities | 16 Experience Centers"
+   copied from a competitor, and four lorem-ipsum service descriptions.
+5. **The navigation existed six times** (medium) — already drifted; the footer
+   said "Projects" on one page and "Project" on another.
+6. **Media queries that broke small screens** (medium) — `min-width: 400px` on
+   nine selectors meant anything narrower got a horizontal scrollbar.
+7. **No metadata worth the name** (medium) — no charset on `index.html`, title
+   "Homepage", zero meta descriptions, OG tags, canonicals or structured data.
+8. **Dead code** (low) — `interior.html` was zero bytes; two complete pages were
+   linked from nothing; jQuery slim was loaded *after* code calling `.animate()`.
+
+## Architecture
+
+```
+src/
+  app/                 routes — home, about, services, projects, contact, case-study
+    api/contact/       validated form endpoint (replaces mail_handler.php)
+  components/          header, footer, hero, gallery, form, primitives
+  data/
+    site.ts            business facts and page copy — one source of truth
+    gallery.ts         photo categorisation, alt text, curation
+    image-manifest.json  generated; never hand-edited
+    case-study.ts      benchmark numbers and findings
+  lib/
+    contact-schema.ts  Zod schema shared by the client form and the API route
+scripts/
+  build-image-manifest.mjs   reads real image dimensions → manifest (runs on prebuild)
+  optimize-source-images.mjs the pipeline that produced public/images
+  verify.mjs                 behavioural checks against a running build
+  benchmark.mjs              the v1-vs-rebuild measurement harness
+```
+
+Decisions worth naming:
+
+- **`data/site.ts` is the only place business facts live.** Phone numbers,
+  address and the service list are read by every page, the footer and the
+  JSON-LD. The v1 drift problem cannot recur.
+- **Image dimensions are generated, not typed.** `next/image` needs intrinsic
+  size to reserve space; v1 had `height="181px" width="243px"` attributes on
+  images that were actually 3000 px wide. `prebuild` regenerates the manifest
+  from the files on disk.
+- **One Zod schema, two consumers.** The browser and the server enforce
+  identical rules; the client check just saves a round trip.
+- **Scroll reveals fail open.** The server renders content visible and JS *adds*
+  the hidden state only once it has confirmed it can remove it again — so a
+  failed script leaves a readable page rather than a blank one.
+
+## Verification
+
+`npm run verify` drives a real browser against a production build and checks the
+things unit tests miss. All 20 currently pass:
+
+- gallery lightbox opens from the keyboard, arrow keys navigate, Escape closes,
+  focus returns to the trigger
+- mobile drawer sets `aria-expanded`, traps focus, locks and restores body scroll
+- contact form reports errors via `role="alert"` and `aria-invalid`, and moves
+  focus to the first invalid field
+- `POST /api/contact` rejects a newline in the name field with 422 — the v1 bug
+- the home page is still readable with JavaScript disabled
+
+Separately checked at 320 / 375 / 414 / 768 / 1024 / 1280 / 1920 px: **no
+horizontal overflow at any width**, including the 320 px case v1 broke outright.
+
+## Running it
+
+```bash
+npm install
+npm run dev
+```
+
+```bash
+npm run build && npm start   # production
+npm run verify               # behavioural checks (needs the server running)
+npm run benchmark            # v1 vs rebuild (see scripts/benchmark.mjs header)
+npm run typecheck && npm run lint
+```
+
+`verify` and `benchmark` drive the Chrome already installed on the machine, so
+`npx playwright install` is not required.
+
+### Environment
+
+The contact form works without configuration — enquiries are logged instead of
+emailed. To actually deliver mail, set:
+
+```bash
+RESEND_API_KEY=...                              # https://resend.com
+CONTACT_TO_EMAIL=enquiries@example.com
+CONTACT_FROM_EMAIL=website@example.com          # optional
+```
+
+## Trade-offs
+
+**Why Next.js for a five-page brochure site?** Honestly, a static site generator
+would serve the business equally well. Next earns its place for the image
+pipeline — `next/image` doing per-breakpoint WebP/AVIF across 131 photographs is
+the single largest win on the page — and for giving the form a typed server
+route without separate infrastructure. The cost is the +163% JavaScript row.
+
+**Why keep the original photographs?** They are the firm's actual work, and
+stock photography would be a lie. The constraint is real: 91 of the 131
+surviving images are under 800 px wide, because they are phone uploads from
+2014–2020. The layout is built around that — tiles are capped at sizes those
+files can fill honestly, the hero uses the only three photographs above 1000 px,
+and nothing small is stretched full-bleed.
+
+**Why rewrite the copy?** v1 claimed more designers than customers and shipped
+lorem ipsum on the services page. Presenting that as finished work would mean
+vouching for it.
+
+## Known gaps before this could go live
+
+- The rate limiter is an in-process `Map` — correct for one instance, wrong the
+  moment it scales horizontally. Needs Upstash or equivalent.
+- Email delivery is unconfigured by default; without `RESEND_API_KEY` the route
+  logs rather than sends.
+- Team photographs and partner logos should be replaced with images the firm has
+  explicit permission to publish.
+- The photo library would benefit from a proper reshoot far more than from any
+  further engineering.
+
+---
+
+Original site © 2019. Rebuild by [Kaushal Mishra](https://github.com/kaushal0107).

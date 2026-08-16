@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   The old site had no scale at all: 14 hard-coded hex values, font sizes from
+   13px to 50px picked ad hoc, and spacing done with stacked <br> tags. These
+   tokens are the whole vocabulary the site is allowed to use.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Warm neutrals — plaster, lime wash, oak. The palette an interiors firm
+     should own, instead of the deepskyblue/orangered/#E1D13F it had. */
+  --color-bone-50: #fbfaf7;
+  --color-bone-100: #f5f2ec;
+  --color-bone-200: #ebe6dc;
+  --color-bone-300: #d9d1c2;
+  --color-bone-400: #b8ab95;
+
+  --color-ink-400: #6f6a62;
+  --color-ink-500: #55504a;
+  --color-ink-600: #45403a;
+  --color-ink-700: #2d2a26;
+  --color-ink-800: #1f1d1a;
+  --color-ink-900: #141311;
+
+  /* Single accent: aged brass. Used for emphasis, never for large fills. */
+  --color-brass-300: #d9b779;
+  --color-brass-400: #c79c4f;
+  --color-brass-500: #ad7f33;
+  --color-brass-600: #8a6427;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fluid type — replaces the fixed px sizes that overflowed on small screens */
+  --text-display: clamp(2.5rem, 1.6rem + 4.2vw, 5.5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.025em;
+  --text-h1: clamp(2rem, 1.4rem + 2.6vw, 3.75rem);
+  --text-h1--line-height: 1.08;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h2: clamp(1.6rem, 1.25rem + 1.6vw, 2.75rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h3: clamp(1.2rem, 1.05rem + 0.6vw, 1.6rem);
+  --text-h3--line-height: 1.25;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bone-50);
+    color: var(--color-ink-700);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink-900);
+    font-weight: 400;
+  }
+
+  /* The old site had no visible focus style anywhere — keyboard users were lost. */
+  :focus-visible {
+    outline: 2px solid var(--color-brass-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brass-300);
+    color: var(--color-ink-900);
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    max-width: 80rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-page {
+      padding-inline: 3.5rem;
+    }
+  }
+}
+
+/* Entrance animation, driven by IntersectionObserver in <Reveal>. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.75rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Visible by default — <Reveal> adds data-armed only once JS is running, so a
+   failed script leaves readable content rather than a blank page. */
+.reveal[data-armed="true"] {
+  opacity: 0;
+}
+
+.reveal[data-armed="true"][data-visible="true"] {
+  animation: reveal-up 0.75s var(--ease-out-expo) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal[data-armed="true"],
+  .reveal[data-armed="true"][data-visible="true"] {
+    opacity: 1;
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
