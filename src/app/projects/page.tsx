@@ -25,8 +25,6 @@ export default function ProjectsPage() {
         image="/images/hero/hero-01.webp"
       />
 
-      {/* The legacy page opened with a defensive note explaining why the real
-          portfolio was not online. This states the actual situation instead. */}
       <div className="border-b border-bone-200 bg-bone-100">
         <div className="container-page py-8">
           <p className="max-w-3xl text-sm leading-relaxed text-ink-500">

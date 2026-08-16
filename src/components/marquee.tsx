@@ -13,14 +13,6 @@ const ITEMS = [
   "Waterproofing",
 ];
 
-/**
- * Pure-CSS marquee.
- *
- * The old site's partner-logo scroller used a `width: 1500px` fixed track with
- * `translateX(-100%)`, which left a visible dead gap on every loop and blew out
- * the horizontal scrollbar below 400px. Duplicating the track and translating
- * by exactly -50% makes the loop seamless at any width.
- */
 export function Marquee() {
   return (
     <section

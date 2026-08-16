@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-/** One representative photograph per service, picked by hand. */
 const SERVICE_IMAGE: Record<string, string> = {
   residential: "/images/projects/residential/residential-03.webp",
   commercial: "/images/projects/commercial/commercial-01.webp",
@@ -92,7 +91,6 @@ export default function ServicesPage() {
         );
       })}
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="border-t border-bone-200">
         <div className="container-page grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">
@@ -121,7 +119,6 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="bg-bone-100">
         <div className="container-page grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">
@@ -156,7 +153,6 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="bg-ink-900 py-20 md:py-28">
         <div className="container-page flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <h2 className="max-w-xl text-h2 text-white text-balance">

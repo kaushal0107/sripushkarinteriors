@@ -1,15 +1,4 @@
 #!/usr/bin/env node
-/**
- * Head-to-head performance measurement, v1 versus the rebuild.
- *
- * Produces the numbers on /case-study. Both versions are served locally so the
- * comparison is not confounded by hosting. To restore v1:
- *
- *   git archive 8b4d0cc | tar -x -C /tmp/legacy-site
- *   npx serve -l 4320 /tmp/legacy-site
- *   npm run build && npx next start -p 4321
- *   node scripts/benchmark.mjs
- */
 import { chromium } from "playwright";
 
 const TARGETS = [
@@ -17,8 +6,6 @@ const TARGETS = [
   { label: "rebuild", url: process.env.NEW_URL ?? "http://localhost:4321/" },
 ];
 
-// Chrome DevTools "Fast 3G" preset — representative of a mid-range phone on
-// Indian mobile data, which is the actual audience for this site.
 const NETWORK = {
   offline: false,
   latency: 150,
@@ -39,8 +26,6 @@ const OBSERVER_INIT = `
   }).observe({ type: 'layout-shift', buffered: true });
 `;
 
-// Uses the Chrome already installed on the machine, so `npx playwright
-// install` is not a prerequisite for running these checks.
 const browser = await chromium.launch({ channel: "chrome" });
 
 const results = [];
@@ -73,7 +58,7 @@ for (const target of TARGETS) {
       else if (type.includes("css")) cssBytes += buffer.length;
       else if (type.includes("font")) fontBytes += buffer.length;
     } catch {
-      /* redirects have no retrievable body */
+      return;
     }
   });
 

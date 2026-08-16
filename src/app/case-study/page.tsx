@@ -47,7 +47,6 @@ export default function CaseStudyPage() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="py-14 md:py-20">
         <div className="container-page">
           <div className="max-w-3xl rounded-sm border border-brass-300/60 bg-brass-300/10 p-6 md:p-8">
@@ -62,7 +61,7 @@ export default function CaseStudyPage() {
       </Section>
 
       <Section className="pt-0 pb-16 md:pb-24">
-        <div className="container-page grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
+        <div className="container-page grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {repoStats.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
               <p className="font-display text-3xl text-ink-900 md:text-4xl">{s.value}</p>
@@ -73,7 +72,6 @@ export default function CaseStudyPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="border-y border-bone-200 bg-bone-100 py-16 md:py-24">
         <div className="container-page">
           <SectionHeading
@@ -82,7 +80,11 @@ export default function CaseStudyPage() {
             intro="Both builds served locally and loaded cold, loading the same photographs. The one row that got worse is left in."
           />
 
-          <div className="mt-12 overflow-x-auto">
+          <p className="mt-8 text-xs uppercase tracking-wider text-ink-400 md:hidden">
+            Scroll the table sideways
+          </p>
+
+          <div className="mt-4 -mx-5 overflow-x-auto px-5 md:mt-10 md:mx-0 md:px-0">
             <table className="w-full min-w-[640px] border-collapse text-left">
               <caption className="sr-only">
                 Performance comparison between the 2019 site and the rebuild
@@ -159,7 +161,6 @@ export default function CaseStudyPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="py-16 md:py-24">
         <div className="container-page">
           <SectionHeading
@@ -168,7 +169,7 @@ export default function CaseStudyPage() {
             intro="Nine issues found reading the v1 source, in rough order of how much they mattered."
           />
 
-          <ol className="mt-14 space-y-px overflow-hidden rounded-sm bg-bone-200">
+          <ol className="mt-10 space-y-px overflow-hidden rounded-sm bg-bone-200 md:mt-14">
             {findings.map((finding, i) => (
               <Reveal as="li" key={finding.problem} delay={i * 40} className="bg-bone-50">
                 <article className="grid gap-6 p-6 md:grid-cols-[9rem_1fr] md:p-10">
@@ -205,7 +206,6 @@ export default function CaseStudyPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="border-t border-bone-200 bg-bone-100 py-16 md:py-24">
         <div className="container-page grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">
@@ -239,7 +239,6 @@ export default function CaseStudyPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="py-16 md:py-24">
         <div className="container-page">
           <SectionHeading eyebrow="Stack" title="What it is built from" />

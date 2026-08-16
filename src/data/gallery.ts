@@ -8,19 +8,12 @@ export type Photo = {
   height: number;
   alt: string;
   category: GalleryCategory;
-  /** Sub-group used for section headings and the lightbox caption. */
   set: string;
 };
 
 type ManifestEntry = { src: string; width: number; height: number };
 const images = manifest as Record<string, ManifestEntry[]>;
 
-/**
- * The legacy gallery shipped 40+ `<img>` tags with no `alt` attribute at all,
- * and its folders were named by whoever uploaded them ("hii", "celing",
- * "kichten", "livinig"). Categories are now explicit, and every image gets
- * descriptive alt text derived from its set.
- */
 const SETS: Record<GalleryCategory, string[]> = {
   residential: ["Living spaces", "Kitchens", "Joinery & storage", "Ceilings & lighting"],
   commercial: ["Workplace", "Retail & hospitality", "Banking halls"],
@@ -58,10 +51,6 @@ export const heroImages = (images["hero"] ?? []).map((img, i) => ({
   ][i] ?? "Architectural illustration",
 }));
 
-/**
- * Hand-picked for the home page: one strong example from each visual family,
- * so the opening grid shows the range rather than four variations of one idea.
- */
 const FEATURED_SRC = [
   "/images/projects/commercial/commercial-01.webp",
   "/images/projects/residential/residential-03.webp",
@@ -79,10 +68,6 @@ export const featuredPhotos: Photo[] = FEATURED_SRC.map((src) => bySrc.get(src))
   (p): p is Photo => Boolean(p),
 );
 
-/**
- * Display order for the gallery: the hand-picked images first, so the opening
- * rows are the strongest work rather than whichever folder sorted first.
- */
 const featuredSet = new Set(FEATURED_SRC);
 export const galleryPhotos: Photo[] = [
   ...featuredPhotos,

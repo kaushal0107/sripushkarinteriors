@@ -1,12 +1,3 @@
-/**
- * Monogram avatars.
- *
- * The v1 site showed photographs of four identifiable people, filenames intact
- * ("WhatsApp Image 2020-09-03 at 12.52.06 AM.jpeg"). Publishing those in a
- * portfolio is not something to do casually, so the team here is fictional and
- * rendered as monograms — no image request, no likeness, and it scales to any
- * size without a second asset.
- */
 const TINTS = [
   { bg: "var(--color-bone-200)", fg: "var(--color-ink-700)", rule: "var(--color-brass-400)" },
   { bg: "var(--color-ink-800)", fg: "var(--color-bone-100)", rule: "var(--color-brass-300)" },
@@ -34,7 +25,6 @@ export function Avatar({
     >
       <rect width="400" height="500" fill={tint.bg} />
 
-      {/* An abstract figure — shoulders and head, not a face. */}
       <circle cx="200" cy="215" r="62" fill={tint.fg} opacity="0.16" />
       <path
         d="M200 300c-62 0-112 42-124 100h248c-12-58-62-100-124-100Z"

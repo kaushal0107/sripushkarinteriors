@@ -128,8 +128,7 @@ scripts/
   generate-placeholder-images.mjs  the whole image library, as SVG → WebP
   build-image-manifest.mjs         reads real dimensions → manifest (prebuild)
   check-image-refs.mjs             fails the build on a dangling /images path
-  verify.mjs                       behavioural checks against a running build
-  check-responsive.mjs             overflow + tap targets at 7 widths
+  verify.mjs                       behaviour, security headers and layout checks
   benchmark.mjs                    the v1-vs-rebuild measurement harness
 ```
 
@@ -153,19 +152,21 @@ Decisions worth naming:
 ## Verification
 
 `npm run verify` drives a real browser against a production build and checks the
-things unit tests miss. All 20 currently pass:
+things unit tests miss. All 26 currently pass:
 
 - gallery lightbox opens from the keyboard, arrow keys navigate, Escape closes,
   focus returns to the trigger
 - mobile drawer sets `aria-expanded`, traps focus, locks and restores body scroll
 - contact form reports errors via `role="alert"` and `aria-invalid`, and moves
   focus to the first invalid field
+- the mobile drawer actually covers the viewport with an opaque background —
+  added after a real bug where `backdrop-blur` on the header made it the
+  containing block for the `fixed` drawer, clipping it to the 80px header box
 - `POST /api/contact` rejects a newline in the name field with 422 — the v1 bug
+- security headers are set and `X-Powered-By` is gone
 - the home page is still readable with JavaScript disabled
-
-`npm run check:responsive` asserts no horizontal overflow and no undersized tap
-targets at 320 / 375 / 414 / 768 / 1024 / 1280 / 1920 px — including the 320 px
-case v1 broke outright.
+- no horizontal overflow and no undersized tap targets at 320 / 375 / 414 / 768
+  / 1024 / 1280 / 1920 px — including the 320 px case v1 broke outright
 
 ## Running it
 
@@ -176,19 +177,21 @@ npm run dev
 
 ```bash
 npm run build && npm start   # production
-npm run verify               # behavioural checks (needs the server running)
-npm run check:responsive     # layout checks across 7 widths
-npm run benchmark            # v1 vs rebuild (see scripts/benchmark.mjs header)
+npm run verify               # 26 checks against a running build
+npm run benchmark            # v1 vs rebuild (see the header of the script)
 npm run typecheck && npm run lint
+npm run images:generate      # regenerate the artwork
 ```
 
-`verify`, `check:responsive` and `benchmark` drive the Chrome already installed
-on the machine, so `npx playwright install` is not required.
-
-To regenerate the artwork:
+`verify` and `benchmark` drive the Chrome already installed on the machine, so
+`npx playwright install` is not required. `benchmark` needs the v1 site served
+alongside the rebuild:
 
 ```bash
-node scripts/generate-placeholder-images.mjs
+git archive 8b4d0cc | tar -x -C /tmp/legacy-site
+npx serve -l 4320 /tmp/legacy-site
+npm run build && npx next start -p 4321
+LEGACY_URL=http://localhost:4320/ NEW_URL=http://localhost:4321/ npm run benchmark
 ```
 
 ### Environment
@@ -217,6 +220,18 @@ of the design, and regenerate from ~300 reviewable lines.
 **Why rewrite the copy?** v1 claimed more designers than customers and shipped
 lorem ipsum on the services page. Presenting that as finished work would mean
 vouching for it.
+
+## Production notes
+
+Security headers are set in `next.config.ts` and asserted by `npm run verify`:
+CSP, HSTS, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
+`Referrer-Policy` and a `Permissions-Policy` denying camera, microphone,
+geolocation, payment and USB. `X-Powered-By` is off.
+
+The CSP uses `script-src 'self' 'unsafe-inline'`. Tightening that to nonces
+means running every request through middleware, which would opt the whole site
+out of static generation — a bad trade for a brochure site, so it is a
+deliberate choice rather than an oversight.
 
 ## Known gaps
 

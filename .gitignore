@@ -45,3 +45,7 @@ next-env.d.ts
 
 # local editor/agent scratch
 /.claude/
+
+# agent scaffolding, regenerated locally by next dev
+AGENTS.md
+CLAUDE.md

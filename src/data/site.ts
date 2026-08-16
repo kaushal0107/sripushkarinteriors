@@ -1,24 +1,3 @@
-/**
- * Single source of truth for business facts and page copy.
- *
- * ─────────────────────────────────────────────────────────────────────────────
- * EVERYTHING HERE IS FICTIONAL.
- *
- * This repository began as a real client site. For a public portfolio the
- * client's identity, staff, customers and project photography have all been
- * removed — the firm name, domain, phone numbers, address and people below are
- * invented, the domain uses the RFC 2606 `.example` reserved TLD, and the
- * imagery is generated (see scripts/generate-placeholder-images.mjs).
- *
- * What is real is the engineering: the structure, the measurements on
- * /case-study, and the defects catalogued there.
- * ─────────────────────────────────────────────────────────────────────────────
- *
- * On the legacy site every phone number, address and nav item was retyped by
- * hand on all six pages, so they drifted (the footer said "Projects" on one
- * page and "Project" on another, and the nav order differed between files).
- */
-
 export const site = {
   name: "Meridian Interiors",
   legalName: "Meridian Interiors & Contracts",
@@ -41,7 +20,6 @@ export const site = {
   },
   mapQuery: "Sundale Business Park, Pune, Maharashtra 411001",
   social: [{ label: "Instagram", href: "https://instagram.example/meridian" }],
-  /** Rendered in the footer and on /case-study. */
   isDemo: true,
 } as const;
 
@@ -53,12 +31,6 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-/**
- * The legacy site claimed "879 Happy Customers" alongside "954 Expert
- * Designers" — more designers than clients — plus "8 Cities | 16 Experience
- * Centers" copied verbatim from a national competitor. These are internally
- * consistent stand-ins for a firm trading since 2009.
- */
 export const stats = [
   { value: "15+", label: "Years in practice", detail: "Building in Pune since 2009" },
   { value: "300+", label: "Projects delivered", detail: "Homes, offices, retail and civil" },
@@ -193,7 +165,6 @@ export const process = [
   },
 ] as const;
 
-/** Fictional. Rendered as monogram avatars — no photographs of real people. */
 export const team = [
   {
     name: "Aditi Raman",
@@ -215,7 +186,6 @@ export const team = [
   },
 ] as const;
 
-/** Fictional. Drawn as wordmarks in src/components/client-marks.tsx. */
 export const clients = [
   "Northbank",
   "Corvus Group",

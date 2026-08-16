@@ -25,7 +25,6 @@ export default function AboutPage() {
         image="/images/hero/hero-02.webp"
       />
 
-      {/* ---------------------------------------------------------------- */}
       <Section>
         <div className="container-page grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-24">
           <Reveal className="space-y-6 text-lg leading-relaxed text-ink-500">
@@ -58,7 +57,7 @@ export default function AboutPage() {
           </Reveal>
         </div>
 
-        <div className="container-page mt-20 grid grid-cols-2 gap-x-6 gap-y-12 border-t border-bone-200 pt-14 lg:grid-cols-4">
+        <div className="container-page mt-14 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-bone-200 pt-10 md:mt-20 md:gap-y-12 md:pt-14 lg:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
               <p className="font-display text-5xl text-ink-900 md:text-6xl">{s.value}</p>
@@ -69,7 +68,6 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="bg-bone-100">
         <div className="container-page">
           <SectionHeading
@@ -77,7 +75,7 @@ export default function AboutPage() {
             title="What you are actually buying"
             intro="Six things that decide whether an interior project goes well — and how we handle each one."
           />
-          <ul className="mt-16 grid gap-x-12 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-x-12 gap-y-12 md:mt-16 md:grid-cols-2 md:gap-y-14 lg:grid-cols-3">
             {values.map((v, i) => (
               <Reveal as="li" key={v.title} delay={i * 70}>
                 <p className="font-display text-sm text-brass-500 tabular-nums">
@@ -91,7 +89,6 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section>
         <div className="container-page">
           <SectionHeading
@@ -100,7 +97,7 @@ export default function AboutPage() {
             intro="A small team. The person who quotes your job is the person who runs it."
           />
 
-          <ul className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-10 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
             {team.map((member, i) => (
               <Reveal as="li" key={member.name} delay={i * 90}>
                 <div className="aspect-[4/5] overflow-hidden rounded-sm">
@@ -119,8 +116,6 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* ---------------------------------------------------------------- */}
       <Section className="border-t border-bone-200 py-16 md:py-20 lg:py-24">
         <div className="container-page">
           <p className="text-center text-eyebrow uppercase text-ink-400">
@@ -130,7 +125,6 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="bg-ink-900 py-20 md:py-28">
         <div className="container-page flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <div>

@@ -1,17 +1,5 @@
 import { site } from "@/data/site";
 
-/**
- * Wordmark.
- *
- * The v1 logo was a 600×196 PNG with a grey drop shadow baked into the pixels
- * and a semi-opaque halo around the mark. It could not be recoloured for a dark
- * background — inverting it produced a white smudge — and it was the heaviest
- * above-the-fold request on the page.
- *
- * This is drawn in ~2KB of markup that inherits `currentColor`, so one mark
- * serves the transparent hero, the light header and the dark footer. The name
- * is fictional, like the rest of the content — see src/data/site.ts.
- */
 export function Wordmark({
   className = "",
   showTagline = true,
@@ -39,7 +27,7 @@ export function Wordmark({
 export function Mark({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" fill="none" aria-hidden className={className}>
-      {/* Two offset squares make the eight-point star of the original mandala. */}
+
       <g stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
         <rect x="9" y="9" width="30" height="30" />
         <rect

@@ -7,17 +7,6 @@ import { contactSchema, PROJECT_TYPES } from "@/lib/contact-schema";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-/**
- * Accessible contact form.
- *
- * The legacy form posted straight to `mail_handler.php` and navigated away to a
- * bare `<h1>Sent Successfully!</h1>` on a white page. Validation was a jQuery
- * file that bound to `.input100` classes the markup never used, so nothing was
- * ever actually validated client-side.
- *
- * Here errors are announced, tied to their input with aria-describedby, and
- * focus moves to the first invalid field.
- */
 export function ContactForm() {
   const formId = useId();
   const [status, setStatus] = useState<Status>("idle");
@@ -41,8 +30,6 @@ export function ContactForm() {
     const formData = new FormData(event.currentTarget);
     const raw = Object.fromEntries(formData) as Record<string, string>;
 
-    // Validate with the same schema the server uses, so most mistakes never
-    // become a round trip.
     const parsed = contactSchema.safeParse(raw);
     if (!parsed.success) {
       const fieldErrors: Record<string, string> = {};
@@ -226,7 +213,6 @@ export function ContactForm() {
         />
       </Field>
 
-      {/* Honeypot — visually and programmatically hidden from real users. */}
       <div aria-hidden className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
         <label htmlFor={fieldId("website")}>Website</label>
         <input id={fieldId("website")} name="website" type="text" tabIndex={-1} autoComplete="off" />

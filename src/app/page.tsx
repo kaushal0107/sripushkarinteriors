@@ -15,7 +15,6 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="border-b border-bone-200">
         <div className="container-page grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
           <Reveal>
@@ -49,9 +48,7 @@ export default function HomePage() {
           </Reveal>
         </div>
 
-        {/* Stats — honest replacements for "879 Happy Customers / 954 Expert
-            Designers", which claimed more designers than clients. */}
-        <div className="container-page mt-20 grid grid-cols-2 gap-x-6 gap-y-12 border-t border-bone-200 pt-14 lg:grid-cols-4">
+        <div className="container-page mt-14 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-bone-200 pt-10 md:mt-20 md:gap-y-12 md:pt-14 lg:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 90}>
               <p className="font-display text-5xl text-ink-900 md:text-6xl">{s.value}</p>
@@ -62,7 +59,6 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="bg-bone-100">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-8">
@@ -76,7 +72,7 @@ export default function HomePage() {
             </Button>
           </div>
 
-          <ul className="mt-16 grid gap-px overflow-hidden rounded-sm bg-bone-300 sm:grid-cols-2">
+          <ul className="mt-10 grid gap-px overflow-hidden rounded-sm bg-bone-300 sm:grid-cols-2 md:mt-16">
             {services.map((s, i) => (
               <Reveal as="li" key={s.slug} delay={i * 80} className="bg-bone-50">
                 <Link
@@ -101,7 +97,6 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section>
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-8">
@@ -113,9 +108,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Even 4-up grid. The source photographs are mostly ~500px wide, so
-            tiles are deliberately kept small rather than blown up full-bleed. */}
-        <div className="container-page mt-16 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
+        <div className="container-page mt-10 grid grid-cols-2 gap-3 md:mt-16 md:gap-4 lg:grid-cols-4">
           {showcase.map((photo, i) => (
             <Reveal
               key={photo.src}
@@ -144,7 +137,6 @@ export default function HomePage() {
 
       <Marquee />
 
-      {/* ---------------------------------------------------------------- */}
       <Section className="bg-bone-100">
         <div className="container-page">
           <SectionHeading
@@ -153,7 +145,7 @@ export default function HomePage() {
             intro="Six things that decide whether an interior project goes well — and how we handle each one."
           />
 
-          <ul className="mt-16 grid gap-x-12 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-x-12 gap-y-12 md:mt-16 md:grid-cols-2 md:gap-y-14 lg:grid-cols-3">
             {values.map((v, i) => (
               <Reveal as="li" key={v.title} delay={i * 70}>
                 <p className="font-display text-sm text-brass-500 tabular-nums">
@@ -167,7 +159,6 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <Section>
         <div className="container-page grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">
@@ -202,7 +193,6 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------------- */}
       <section className="relative isolate overflow-hidden bg-ink-900 py-24 md:py-36">
         <Image
           src="/images/hero/hero-03.webp"

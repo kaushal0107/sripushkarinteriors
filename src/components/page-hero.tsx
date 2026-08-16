@@ -1,15 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 
-/**
- * Shared interior-page header.
- *
- * The legacy pages each opened with a bare `<img class="h-650">` stretched to
- * `width: 100%` with a fixed 650px height — so every banner was distorted, and
- * on a phone you got a 650px-tall sliver of a photo before any text appeared.
- * Here the band is sized by its content with the image behind it, so the
- * heading is always the first thing you read.
- */
 export function PageHero({
   eyebrow,
   title,

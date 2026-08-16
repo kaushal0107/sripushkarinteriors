@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-/** Small caps label that sits above a section heading. */
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <p className="flex items-center gap-3 text-eyebrow uppercase text-brass-600">
@@ -17,7 +16,7 @@ export function Section({
   ...props
 }: ComponentProps<"section">) {
   return (
-    <section className={`py-20 md:py-28 lg:py-36 ${className}`} {...props}>
+    <section className={`py-16 md:py-24 lg:py-32 ${className}`} {...props}>
       {children}
     </section>
   );

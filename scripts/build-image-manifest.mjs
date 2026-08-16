@@ -1,16 +1,4 @@
 #!/usr/bin/env node
-/**
- * Regenerates src/data/image-manifest.json by reading the real dimensions of
- * everything in public/images.
- *
- * Why this exists: `next/image` needs intrinsic width and height to reserve
- * space before a photo loads, and this gallery has ~135 of them. Hand-typing
- * those numbers is how the legacy site ended up with `height="181px"
- * width="243px"` attributes on images that were actually 3000px wide — every
- * one of which caused a layout shift.
- *
- * Runs automatically before `next build` via the `prebuild` script.
- */
 import { readdir, stat, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,7 +10,6 @@ const IMAGES_DIR = join(ROOT, "public", "images");
 const OUT_FILE = join(ROOT, "src", "data", "image-manifest.json");
 const EXTENSIONS = /\.(webp|png|jpe?g|avif)$/i;
 
-/** Sorts `photo-2` before `photo-10` instead of lexicographically. */
 const collator = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
 
 async function walk(dir) {

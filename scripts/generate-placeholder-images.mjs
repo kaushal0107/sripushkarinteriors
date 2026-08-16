@@ -1,21 +1,4 @@
 #!/usr/bin/env node
-/**
- * Generates the site's imagery.
- *
- * This is a portfolio rebuild of a real client site, so none of the original
- * photography ships here — it was a working firm's project archive, including
- * photographs of identifiable people and client premises. Rather than substitute
- * stock photographs (which would imply work that was never done), every image is
- * drawn procedurally: abstract architectural compositions in the site's own
- * palette, obviously illustrative rather than photographic.
- *
- * Each composition is authored as SVG and rasterised with sharp, so the output
- * is deterministic — the same seed always produces the same image — and the
- * whole library regenerates from ~300 lines rather than living in git as
- * binaries nobody can diff.
- *
- *   node scripts/generate-placeholder-images.mjs
- */
 import { mkdir, rm } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,22 +8,17 @@ import sharp from "sharp";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "public", "images");
 
-/* ------------------------------------------------------------------ palette */
-// Same tokens as src/app/globals.css, so generated art and UI stay in step.
 const BONE = ["#fbfaf7", "#f5f2ec", "#ebe6dc", "#d9d1c2", "#b8ab95"];
 const INK = ["#6f6a62", "#55504a", "#45403a", "#2d2a26", "#1f1d1a", "#141311"];
 const BRASS = ["#d9b779", "#c79c4f", "#ad7f33", "#8a6427"];
 const ACCENT = ["#8a9a86", "#b08268", "#7a8794", "#9d8f7a"];
 
-/** Three tonal schemes so a grid of these does not read as one flat texture. */
 const SCHEMES = [
   { name: "light", bg: BONE[1], plane: BONE[2], solid: BONE[3], line: INK[0], ink: INK[3] },
   { name: "mid", bg: BONE[3], plane: BONE[2], solid: BONE[4], line: INK[2], ink: INK[4] },
   { name: "dark", bg: INK[3], plane: INK[2], solid: INK[1], line: BONE[3], ink: BONE[2] },
 ];
 
-/* --------------------------------------------------------------------- rng */
-/** mulberry32 — small, seedable, good enough for layout jitter. */
 function rng(seed) {
   let a = seed >>> 0;
   return () => {
@@ -54,9 +32,6 @@ function rng(seed) {
 const pick = (r, list) => list[Math.floor(r() * list.length)];
 const between = (r, lo, hi) => lo + r() * (hi - lo);
 
-/* -------------------------------------------------------------- compositions */
-
-/** Interior volume: back wall, floor plane, window, pendant light. */
 function room(r, w, h, s) {
   const floorY = h * between(r, 0.62, 0.74);
   const winX = w * between(r, 0.12, 0.3);
@@ -85,7 +60,6 @@ function room(r, w, h, s) {
   `;
 }
 
-/** Joinery elevation: a run of cabinet fronts with reveals and handles. */
 function elevation(r, w, h, s) {
   const cols = Math.floor(between(r, 4, 8));
   const gap = w * 0.006;
@@ -112,7 +86,6 @@ function elevation(r, w, h, s) {
   `;
 }
 
-/** Plan fragment: setting-out grid, wall runs, door swings. */
 function plan(r, w, h, s) {
   const step = w / between(r, 9, 14);
   const wall = w * 0.012;
@@ -143,7 +116,6 @@ function plan(r, w, h, s) {
   `;
 }
 
-/** Arched bay: a colonnade of arches over a floor line. */
 function arches(r, w, h, s) {
   const count = Math.floor(between(r, 3, 6));
   const floorY = h * between(r, 0.78, 0.88);
@@ -167,7 +139,6 @@ function arches(r, w, h, s) {
   `;
 }
 
-/** Material stack: horizontal bands, one hairline in brass. */
 function bands(r, w, h, s) {
   const count = Math.floor(between(r, 4, 8));
   const tones = [s.bg, s.plane, s.solid, s.ink];
@@ -189,7 +160,6 @@ function bands(r, w, h, s) {
   return out;
 }
 
-/** Ceiling: concentric coves with downlights. */
 function ceiling(r, w, h, s) {
   const rings = Math.floor(between(r, 3, 6));
   const tones = [s.plane, s.solid, s.bg, s.ink];
@@ -210,7 +180,6 @@ function ceiling(r, w, h, s) {
   return out;
 }
 
-/** Facade: a grid of openings across a building elevation. */
 function facade(r, w, h, s) {
   const cols = Math.floor(between(r, 4, 8));
   const rows = Math.floor(between(r, 3, 6));
@@ -234,7 +203,6 @@ function facade(r, w, h, s) {
   `;
 }
 
-/** Section: stepped levels, as through a stair or a slab edge. */
 function section(r, w, h, s) {
   const steps = Math.floor(between(r, 4, 8));
   const rise = h / (steps + 2);
@@ -260,19 +228,12 @@ function section(r, w, h, s) {
 
 const COMPOSITIONS = { room, elevation, plan, arches, bands, ceiling, facade, section };
 
-/**
- * Each category draws from its own family, so residential does not render
- * identically to civil. Residential leans domestic (rooms, joinery, ceilings),
- * commercial leans spatial (plans, colonnades, facades), civil leans technical
- * (plans, sections, material stacks).
- */
 const FAMILIES = {
   residential: ["room", "elevation", "ceiling", "room", "bands", "elevation"],
   commercial: ["plan", "arches", "facade", "ceiling", "arches", "plan"],
   civil: ["section", "plan", "bands", "facade", "section", "elevation"],
 };
 
-/** Paper grain, so large flat fills do not band when compressed. */
 function grain(w, h, seed) {
   return `
     <filter id="g${seed}" x="0" y="0" width="100%" height="100%">
@@ -285,11 +246,10 @@ function grain(w, h, seed) {
 
 function svg(seed, w, h, compositionName, forcedScheme) {
   const r = rng(seed * 2654435761);
-  // Scheme is drawn from the seeded stream rather than the loop index, so the
-  // tonal rhythm across a grid is irregular instead of striped.
+
   const scheme = forcedScheme ?? pick(r, SCHEMES);
   const draw = COMPOSITIONS[compositionName];
-  // Mirror roughly half of them; asymmetric compositions read as twice as many.
+
   const flip = r() > 0.5;
   const body = draw(r, w, h, scheme);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
@@ -298,9 +258,6 @@ function svg(seed, w, h, compositionName, forcedScheme) {
   </svg>`;
 }
 
-/* -------------------------------------------------------------------- build */
-
-/** [output subdirectory, slug, count, width, height] */
 const GROUPS = [
   ["projects/residential", "residential", 15, 1600, 1200],
   ["projects/commercial", "commercial", 12, 1600, 1200],
@@ -328,10 +285,6 @@ for (const [sub, slug, count, w, h] of GROUPS) {
   console.log(`${sub}: ${count} images`);
 }
 
-// Heroes carry white text over them, so they are locked to the dark scheme.
-// Left to the random picker, a light composition under the hero scrim turned
-// into an unreadable grey wash — flat artwork does not tolerate the heavy
-// gradient that photographs did.
 const HERO_SCHEME = SCHEMES.find((s) => s.name === "dark");
 const heroDir = join(OUT, "hero");
 await rm(heroDir, { recursive: true, force: true });

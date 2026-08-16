@@ -5,14 +5,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { categories, galleryPhotos, type GalleryCategory } from "@/data/gallery";
 
-/**
- * Filterable gallery with a keyboard-operable lightbox.
- *
- * Replaces jQuery + lightbox2 + an Isotope filter bar that was wired to
- * `<li data-filter>` elements nested illegally inside an `<h4>` inside a `<ul>`,
- * with no `alt` text on any of the 40+ images and no keyboard path into the
- * lightbox at all.
- */
 export function Gallery() {
   const [filter, setFilter] = useState<GalleryCategory | "all">("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -48,7 +40,6 @@ export function Gallery() {
       if (e.key === "ArrowRight") step(1);
       if (e.key === "ArrowLeft") step(-1);
       if (e.key === "Tab") {
-        // Only the close and step buttons are focusable — keep focus inside.
         e.preventDefault();
         closeRef.current?.focus();
       }
@@ -102,10 +93,6 @@ export function Gallery() {
           ))}
         </div>
 
-        {/* Uniform 4:3 tiles rather than a masonry flow. The source library
-            mixes portrait and landscape phone photos of very uneven quality;
-            a consistent crop reads as a designed grid instead of a ragged
-            column stack, and the lightbox shows each image uncropped. */}
         <ul className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">
           {shown.map((photo, i) => (
             <li key={photo.src}>

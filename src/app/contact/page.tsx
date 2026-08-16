@@ -26,7 +26,7 @@ export default function ContactPage() {
 
       <Section className="py-16 md:py-24">
         <div className="container-page grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-          {/* Contact details */}
+
           <Reveal className="space-y-10">
             <div>
               <h2 className="text-eyebrow uppercase text-brass-600">Call us</h2>
@@ -78,7 +78,6 @@ export default function ContactPage() {
             </div>
           </Reveal>
 
-          {/* Form */}
           <Reveal delay={100}>
             <div className="rounded-sm border border-bone-300 bg-bone-100 p-6 md:p-10">
               <h2 className="text-h2">Request a consultation</h2>

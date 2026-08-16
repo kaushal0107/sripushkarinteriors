@@ -1,15 +1,4 @@
 #!/usr/bin/env node
-/**
- * Fails the build if any hard-coded `/images/...` path in src/ does not exist
- * on disk.
- *
- * A handful of images are referenced by literal path — the hero, the featured
- * grid, the one representative photo per service. Curating the library means
- * deleting files, and deleting a file that something still points at produces a
- * silently broken image in production. This turns that into a build error.
- *
- * Runs as part of `prebuild`.
- */
 import { readFile, readdir, access } from "node:fs/promises";
 import { dirname, join, extname } from "node:path";
 import { fileURLToPath } from "node:url";

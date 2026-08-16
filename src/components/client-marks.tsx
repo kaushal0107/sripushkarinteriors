@@ -1,17 +1,5 @@
 import { clients } from "@/data/site";
 
-/**
- * Fictional client wordmarks.
- *
- * The v1 "Our Partners" strip carried real, trademarked logos — a bank, two
- * listed IT and finance companies, a shopping centre — several of them
- * duplicated, and one a screenshot of a transparent PNG complete with the
- * checkerboard. Reproducing other companies' marks in a personal portfolio is
- * not defensible, so these are invented names set as type: each gets a small
- * geometric glyph and the name, drawn from the site's own palette.
- */
-
-/** A different simple glyph per client, so the row does not read as one shape. */
 function Glyph({ index }: { index: number }) {
   const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.4 };
   switch (index % 6) {

@@ -1,41 +1,24 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useState, type ElementType, type ReactNode } from "react";
 
-// useLayoutEffect warns during SSR; on the server there is nothing to arm.
-const useIsomorphicLayoutEffect =
-  typeof window === "undefined" ? useEffect : useLayoutEffect;
-
-/**
- * Fade-and-rise on scroll, via IntersectionObserver.
- *
- * Fails *open*: the server renders the element with no `data-armed` attribute,
- * so without JavaScript — or if the observer never fires — the content is
- * simply visible. Hiding only happens once JS has confirmed it can also
- * un-hide, which is the opposite of the usual `opacity: 0` in a stylesheet.
- *
- * The legacy site animated its counters with jQuery `.animate()` on DOMReady,
- * so the numbers had finished counting long before you scrolled to them, and
- * it ignored `prefers-reduced-motion` entirely.
- */
 export function Reveal({
   children,
   delay = 0,
   className = "",
-  as: Tag = "div",
+  as = "div",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
   as?: "div" | "li" | "article" | "section";
 }) {
-  const ref = useRef<HTMLElement>(null);
+  const Tag: ElementType = as;
   const [armed, setArmed] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  useIsomorphicLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+  const attach = useCallback((node: HTMLElement | null) => {
+    if (!node) return;
 
     const reduced =
       typeof window.matchMedia === "function" &&
@@ -46,7 +29,6 @@ export function Reveal({
       return;
     }
 
-    // Hide only now that we know we can reveal it again.
     setArmed(true);
 
     const observer = new IntersectionObserver(
@@ -58,10 +40,8 @@ export function Reveal({
       },
       { rootMargin: "0px 0px -10% 0px", threshold: 0.01 },
     );
-    observer.observe(el);
+    observer.observe(node);
 
-    // Belt and braces: if something goes wrong with the observer, don't leave
-    // the page permanently blank.
     const failsafe = window.setTimeout(() => setVisible(true), 3000);
 
     return () => {
@@ -72,8 +52,7 @@ export function Reveal({
 
   return (
     <Tag
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={ref as any}
+      ref={attach}
       className={`reveal ${className}`}
       data-armed={armed || undefined}
       data-visible={visible || undefined}

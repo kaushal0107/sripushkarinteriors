@@ -5,15 +5,6 @@ import { useState } from "react";
 import { ArrowIcon } from "@/components/ui";
 import { site } from "@/data/site";
 
-/**
- * Click-to-load map.
- *
- * The v1 contact page embedded a Google Maps iframe directly, so every visitor
- * loaded Google's scripts and cookies before deciding they wanted a map. Here
- * the embed is only requested once someone asks for it; until then the panel
- * shows the address and a direct link, which is what most people actually want
- * from a contact page anyway.
- */
 export function MapEmbed() {
   const [loaded, setLoaded] = useState(false);
 
@@ -35,7 +26,7 @@ export function MapEmbed() {
 
   return (
     <div className="relative flex h-[380px] w-full flex-col items-center justify-center gap-6 overflow-hidden bg-bone-100 px-6 text-center md:h-[480px]">
-      {/* Blueprint grid, drawn in CSS — no image request. */}
+
       <div
         aria-hidden
         className="absolute inset-0 opacity-[0.5]"

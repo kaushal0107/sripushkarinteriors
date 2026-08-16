@@ -9,16 +9,6 @@ import { heroImages } from "@/data/gallery";
 
 const WORDS = ["turnkey.", "commercial.", "residential.", "civil."];
 
-/**
- * Full-bleed hero.
- *
- * Replaces a Bootstrap carousel that was pulled up under the navbar with
- * `margin-top: -140px` and forced to `height: 650px !important` — which meant
- * the images were letterboxed on desktop and cropped to nothing on a phone.
- * Here the stage is sized in `svh` — the small-viewport unit, so mobile browser
- * chrome collapsing does not resize the hero mid-scroll — and the images use
- * `object-cover`, so the crop is deliberate at every width.
- */
 export function Hero() {
   const [index, setIndex] = useState(0);
   const [word, setWord] = useState(0);
@@ -26,8 +16,14 @@ export function Hero() {
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (media.matches) return;
-    const slides = setInterval(() => setIndex((i) => (i + 1) % heroImages.length), 6500);
-    const words = setInterval(() => setWord((w) => (w + 1) % WORDS.length), 2600);
+    const slides = setInterval(
+      () => setIndex((i) => (i + 1) % heroImages.length),
+      6500,
+    );
+    const words = setInterval(
+      () => setWord((w) => (w + 1) % WORDS.length),
+      2600,
+    );
     return () => {
       clearInterval(slides);
       clearInterval(words);
@@ -51,10 +47,6 @@ export function Hero() {
         />
       ))}
 
-      {/* Legibility scrim — the old hero laid white nav links straight onto
-          photographs, so the logo vanished on the bright slide. The artwork is
-          generated in the dark scheme, so this only needs to deepen the lower
-          half rather than flatten the whole frame. */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-900 via-ink-900/45 to-transparent"
@@ -73,8 +65,8 @@ export function Hero() {
 
         <div className="mt-8 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <p className="max-w-md text-lg leading-relaxed text-bone-200 text-pretty">
-            Design, materials, labour and site supervision under one contract — so
-            there is one schedule, one bill of quantities, and one person
+            Design, materials, labour and site supervision under one contract —
+            so there is one schedule, one bill of quantities, and one person
             answerable for the handover date.
           </p>
 
@@ -95,11 +87,9 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Rotating word — the legacy version shipped 15KB of minified typed.js
-            inlined into the page source, five times over. This is a setInterval. */}
         <div className="mt-14 flex items-center gap-3 border-t border-white/15 pt-6 text-bone-300">
           <span className="text-sm">We do</span>
-          <span className="relative block h-10 min-w-[11ch] overflow-hidden">
+          <span className="relative block h-10 min-w-[16ch] overflow-hidden">
             {WORDS.map((w, i) => (
               <span
                 key={w}
@@ -117,7 +107,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Slide selector */}
       <div className="container-page relative pb-10">
         <div className="flex gap-2" role="group" aria-label="Hero image">
           {heroImages.map((img, i) => (
@@ -131,7 +120,9 @@ export function Hero() {
             >
               <span
                 className={`block h-0.5 w-10 transition-all duration-500 ${
-                  i === index ? "bg-white" : "bg-white/30 group-hover:bg-white/60"
+                  i === index
+                    ? "bg-white"
+                    : "bg-white/30 group-hover:bg-white/60"
                 }`}
               />
             </button>

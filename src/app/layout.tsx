@@ -65,7 +65,6 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-/** Structured data so the firm can surface as a local business result. */
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "GeneralContractor",

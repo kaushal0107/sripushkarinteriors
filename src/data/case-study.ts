@@ -1,12 +1,3 @@
-/**
- * Measurements for the rebuild write-up.
- *
- * Every number here was taken on one machine, in one sitting, with both
- * versions served locally — the v1 site restored from commit 8b4d0cc and the
- * rebuild running `next start` on a production build. Nothing is estimated.
- * The harness is `scripts/benchmark.mjs`.
- */
-
 export const disclosure = {
   heading: "What is real here, and what is not",
   body: [
@@ -19,11 +10,6 @@ export const benchmark = {
   method:
     "Chrome 141, Fast 3G network emulation (1.6 Mbps down, 150 ms RTT) with 4× CPU throttling, 1440×900 viewport, cold cache, home page only.",
   date: "August 2026",
-  /**
-   * The like-for-like comparison: both columns loading the same photographs.
-   * This is the one that measures the engineering, because the content is held
-   * constant across it.
-   */
   rows: [
     { metric: "Page weight", legacy: "6,047 KB", rebuild: "1,611 KB", delta: "−73%", better: true },
     { metric: "Image bytes", legacy: "5,159 KB", rebuild: "328 KB", delta: "−94%", better: true },
@@ -36,7 +22,6 @@ export const benchmark = {
   ],
   caveat:
     "Both columns above load the same photographs — the v1 originals, and the same originals put through the image pipeline. That is deliberate: holding the content constant is the only way the numbers measure engineering rather than a change of subject matter.",
-  /** What this build actually ships, now that the photography has been swapped. */
   current: {
     note: "The published build serves generated artwork instead, which is flat vector-derived colour and compresses far better than a photograph ever will. Those numbers are listed for completeness, not as a like-for-like result — a 99% drop in image bytes here is a change of content, not an optimisation.",
     rows: [
@@ -68,7 +53,6 @@ export const repoStats = [
   { value: "38 → 0", label: "!important declarations", detail: "Replaced by a token-driven scale" },
 ] as const;
 
-/** Defects found in the v1 source, and what replaced each one. */
 export const findings = [
   {
     tag: "Security",

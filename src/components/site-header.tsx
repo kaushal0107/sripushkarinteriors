@@ -7,17 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "@/components/wordmark";
 import { nav, site } from "@/data/site";
 
-/**
- * Replaces the Bootstrap 4 + jQuery navbar that was pasted into all six pages.
- *
- * Fixes carried over from the audit:
- *  - the old nav was `position: static` over a `margin-top: -140px` hero, so the
- *    white logo sat on whatever the carousel happened to be showing;
- *  - the mobile drawer had no focus trap, no Escape handler and no
- *    `aria-expanded` wiring, so it was unusable by keyboard;
- *  - the active page was marked by hand-editing a class in each file, which had
- *    already drifted out of sync on two pages.
- */
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -25,7 +14,6 @@ export function SiteHeader() {
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  // Solid background once the hero is behind us, transparent over it.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -33,8 +21,6 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock the page behind the drawer and restore the scrollbar width so the
-  // layout doesn't jump when it opens.
   useEffect(() => {
     if (!open) return;
     const { body } = document;
@@ -48,7 +34,6 @@ export function SiteHeader() {
     };
   }, [open]);
 
-  // Escape closes; Tab cycles inside the panel.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -81,108 +66,111 @@ export function SiteHeader() {
   const transparent = onHome && !scrolled && !open;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
-        transparent
-          ? "bg-transparent"
-          : "bg-bone-50/85 shadow-[0_1px_0_rgba(0,0,0,0.06)] backdrop-blur-md"
-      }`}
-    >
-      <div className="container-page flex h-20 items-center justify-between gap-4 md:h-24">
-        <Link
-          href="/"
-          className={`relative z-10 transition-colors duration-500 ${
-            transparent ? "text-white" : "text-ink-900"
-          }`}
-          aria-label={`${site.name} — home`}
-        >
-          <Wordmark />
-        </Link>
-
-        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
-          {nav.map((item) => {
-            const active =
-              item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={`relative px-4 py-2 text-sm tracking-wide transition-colors ${
-                  transparent
-                    ? "text-white/85 hover:text-white"
-                    : "text-ink-500 hover:text-ink-900"
-                } ${active ? (transparent ? "text-white" : "text-ink-900") : ""}`}
-              >
-                {item.label}
-                {active && (
-                  <span
-                    aria-hidden
-                    className={`absolute inset-x-4 bottom-1 h-px ${
-                      transparent ? "bg-white" : "bg-brass-500"
-                    }`}
-                  />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <a
-            href={site.phones[0].href}
-            className={`hidden px-2 py-2 text-sm tracking-wide transition-colors md:block lg:ml-2 ${
-              transparent ? "text-white/85 hover:text-white" : "text-ink-500 hover:text-ink-900"
-            }`}
-          >
-            {site.phones[0].display}
-          </a>
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
+          transparent
+            ? "bg-transparent"
+            : open
+              ? "bg-bone-50"
+              : "bg-bone-50/85 shadow-[0_1px_0_rgba(0,0,0,0.06)] backdrop-blur-md"
+        }`}
+      >
+        <div className="container-page flex h-20 items-center justify-between gap-4 md:h-24">
           <Link
-            href="/contact"
-            className={`hidden rounded-full px-5 py-2.5 text-sm font-medium transition lg:block ${
-              transparent
-                ? "bg-white text-ink-900 hover:bg-bone-200"
-                : "bg-ink-900 text-bone-50 hover:bg-ink-700"
-            }`}
-          >
-            Book a consultation
-          </Link>
-
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            className={`relative z-10 -mr-2 flex h-11 w-11 items-center justify-center rounded-full transition lg:hidden ${
+            href="/"
+            className={`relative z-10 transition-colors duration-500 ${
               transparent ? "text-white" : "text-ink-900"
             }`}
+            aria-label={`${site.name} — home`}
           >
-            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-            <span aria-hidden className="relative block h-4 w-6">
-              <span
-                className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-300 ${
-                  open ? "top-1/2 rotate-45" : "top-0.5"
-                }`}
-              />
-              <span
-                className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-300 ${
-                  open ? "top-1/2 -rotate-45" : "bottom-0.5"
-                }`}
-              />
-            </span>
-          </button>
-        </div>
-      </div>
+            <Wordmark />
+          </Link>
 
-      {/* Mobile drawer */}
+          <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+            {nav.map((item) => {
+              const active =
+                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative px-4 py-2 text-sm tracking-wide transition-colors ${
+                    transparent
+                      ? "text-white/85 hover:text-white"
+                      : "text-ink-500 hover:text-ink-900"
+                  } ${active ? (transparent ? "text-white" : "text-ink-900") : ""}`}
+                >
+                  {item.label}
+                  {active && (
+                    <span
+                      aria-hidden
+                      className={`absolute inset-x-4 bottom-1 h-px ${
+                        transparent ? "bg-white" : "bg-brass-500"
+                      }`}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <a
+              href={site.phones[0].href}
+              className={`hidden px-2 py-2 text-sm tracking-wide transition-colors md:block lg:ml-2 ${
+                transparent ? "text-white/85 hover:text-white" : "text-ink-500 hover:text-ink-900"
+              }`}
+            >
+              {site.phones[0].display}
+            </a>
+            <Link
+              href="/contact"
+              className={`hidden rounded-full px-5 py-2.5 text-sm font-medium transition lg:block ${
+                transparent
+                  ? "bg-white text-ink-900 hover:bg-bone-200"
+                  : "bg-ink-900 text-bone-50 hover:bg-ink-700"
+              }`}
+            >
+              Book a consultation
+            </Link>
+
+            <button
+              ref={toggleRef}
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              className={`relative z-10 -mr-2 flex h-11 w-11 items-center justify-center rounded-full transition lg:hidden ${
+                transparent ? "text-white" : "text-ink-900"
+              }`}
+            >
+              <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+              <span aria-hidden className="relative block h-4 w-6">
+                <span
+                  className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-300 ${
+                    open ? "top-1/2 rotate-45" : "top-0.5"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-300 ${
+                    open ? "top-1/2 -rotate-45" : "bottom-0.5"
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
       <div
         id="mobile-nav"
         ref={panelRef}
         hidden={!open}
-        className="fixed inset-0 top-0 z-0 bg-bone-50 lg:hidden"
+        className="fixed inset-0 z-40 overflow-y-auto bg-bone-50 lg:hidden"
       >
-        <div className="container-page flex h-full flex-col justify-between pt-28 pb-10">
+        <div className="container-page flex min-h-full flex-col justify-between pt-28 pb-10">
           <nav aria-label="Primary mobile">
             <ul className="flex flex-col">
               {nav.map((item, i) => {
@@ -194,12 +182,21 @@ export function SiteHeader() {
                       href={item.href}
                       onClick={() => setOpen(false)}
                       aria-current={active ? "page" : undefined}
-                      className="flex items-baseline gap-4 py-5 font-display text-3xl text-ink-900"
+                      className={`flex items-baseline gap-4 py-5 font-display text-3xl ${
+                        active ? "text-ink-900" : "text-ink-500"
+                      }`}
                     >
-                      <span className="font-sans text-xs text-brass-500 tabular-nums">
+                      <span
+                        className={`font-sans text-xs tabular-nums ${
+                          active ? "text-brass-600" : "text-ink-400"
+                        }`}
+                      >
                         0{i + 1}
                       </span>
                       {item.label}
+                      {active && (
+                        <span aria-hidden className="ml-auto h-1.5 w-1.5 self-center rotate-45 bg-brass-500" />
+                      )}
                     </Link>
                   </li>
                 );
@@ -228,6 +225,6 @@ export function SiteHeader() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
