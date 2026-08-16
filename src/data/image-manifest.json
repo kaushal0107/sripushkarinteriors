@@ -1,0 +1,244 @@
+{
+  "hero": [
+    {
+      "src": "/images/hero/hero-01.webp",
+      "width": 2400,
+      "height": 1350,
+      "bytes": 11904
+    },
+    {
+      "src": "/images/hero/hero-02.webp",
+      "width": 2400,
+      "height": 1350,
+      "bytes": 11628
+    },
+    {
+      "src": "/images/hero/hero-03.webp",
+      "width": 2400,
+      "height": 1350,
+      "bytes": 11996
+    }
+  ],
+  "projects/civil": [
+    {
+      "src": "/images/projects/civil/civil-01.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 12596
+    },
+    {
+      "src": "/images/projects/civil/civil-02.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6338
+    },
+    {
+      "src": "/images/projects/civil/civil-03.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6862
+    },
+    {
+      "src": "/images/projects/civil/civil-04.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6178
+    },
+    {
+      "src": "/images/projects/civil/civil-05.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6522
+    },
+    {
+      "src": "/images/projects/civil/civil-06.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 5924
+    },
+    {
+      "src": "/images/projects/civil/civil-07.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 10980
+    },
+    {
+      "src": "/images/projects/civil/civil-08.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6572
+    },
+    {
+      "src": "/images/projects/civil/civil-09.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6748
+    }
+  ],
+  "projects/commercial": [
+    {
+      "src": "/images/projects/commercial/commercial-01.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8464
+    },
+    {
+      "src": "/images/projects/commercial/commercial-02.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7364
+    },
+    {
+      "src": "/images/projects/commercial/commercial-03.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8054
+    },
+    {
+      "src": "/images/projects/commercial/commercial-04.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8630
+    },
+    {
+      "src": "/images/projects/commercial/commercial-05.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 9762
+    },
+    {
+      "src": "/images/projects/commercial/commercial-06.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 15912
+    },
+    {
+      "src": "/images/projects/commercial/commercial-07.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8814
+    },
+    {
+      "src": "/images/projects/commercial/commercial-08.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8590
+    },
+    {
+      "src": "/images/projects/commercial/commercial-09.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7970
+    },
+    {
+      "src": "/images/projects/commercial/commercial-10.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8594
+    },
+    {
+      "src": "/images/projects/commercial/commercial-11.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 14372
+    },
+    {
+      "src": "/images/projects/commercial/commercial-12.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 13754
+    }
+  ],
+  "projects/residential": [
+    {
+      "src": "/images/projects/residential/residential-01.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6332
+    },
+    {
+      "src": "/images/projects/residential/residential-02.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8206
+    },
+    {
+      "src": "/images/projects/residential/residential-03.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7460
+    },
+    {
+      "src": "/images/projects/residential/residential-04.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7154
+    },
+    {
+      "src": "/images/projects/residential/residential-05.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6726
+    },
+    {
+      "src": "/images/projects/residential/residential-06.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7440
+    },
+    {
+      "src": "/images/projects/residential/residential-07.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7476
+    },
+    {
+      "src": "/images/projects/residential/residential-08.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8372
+    },
+    {
+      "src": "/images/projects/residential/residential-09.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6900
+    },
+    {
+      "src": "/images/projects/residential/residential-10.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7132
+    },
+    {
+      "src": "/images/projects/residential/residential-11.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7834
+    },
+    {
+      "src": "/images/projects/residential/residential-12.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7394
+    },
+    {
+      "src": "/images/projects/residential/residential-13.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 6552
+    },
+    {
+      "src": "/images/projects/residential/residential-14.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 8032
+    },
+    {
+      "src": "/images/projects/residential/residential-15.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 7220
+    }
+  ]
+}
